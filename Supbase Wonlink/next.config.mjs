@@ -14,7 +14,7 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   // Mobile-first optimizations
-  swcMinify: true,
+  // swcMinify is now enabled by default in Next.js 15
 }
 
 export default nextConfig

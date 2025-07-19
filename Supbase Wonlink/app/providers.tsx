@@ -4,7 +4,15 @@ import { createContext, useContext, useState, useEffect, type ReactNode } from "
 import { ThemeProvider } from "next-themes"
 import { Toaster } from "@/components/ui/toaster"
 import type { Language } from "@/lib/translations"
-import type { User } from "@/components/navigation/types"
+
+interface User {
+  id: string
+  name: string
+  email: string
+  role: "brand" | "influencer"
+  avatar_url?: string
+  verified?: boolean
+}
 
 interface AppContextType {
   language: Language
@@ -40,7 +48,7 @@ export function Providers({ children }: { children: ReactNode }) {
     }
 
     const savedLanguage = localStorage.getItem("wonlink-language") as Language
-    if (savedLanguage && (savedLanguage === "ko" || savedLanguage === "en")) {
+    if (savedLanguage && ["ko", "en"].includes(savedLanguage)) {
       setLanguage(savedLanguage)
     }
   }, [])
