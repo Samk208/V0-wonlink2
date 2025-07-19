@@ -1,0 +1,199 @@
+/* ──────────────────────────────────────────
+   Global Styles – Wonlink Design System
+   ────────────────────────────────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1️⃣  Design-System CSS variables
+   -------------------------------------------------- */
+@layer base {
+  :root {
+    /* —— Brand palette (HSL triplets for Tailwind’s hsl(var(--token)) pattern) —— */
+    --primary-50: 240 244 255;
+    --primary-100: 224 233 255;
+    --primary-200: 199 214 254;
+    --primary-300: 165 184 252;
+    --primary-400: 139 149 248;
+    --primary-500: 102 126 234; /* Wonlink Blue */
+    --primary-600: 90 111 216;
+    --primary-700: 76 91 197;
+    --primary-800: 63 75 160;
+    --primary-900: 54 63 127;
+
+    --secondary-50: 245 243 255;
+    --secondary-100: 237 233 254;
+    --secondary-200: 221 214 254;
+    --secondary-300: 196 194 251;
+    --secondary-400: 170 167 248;
+    --secondary-500: 144 136 244; /* Wonlink Purple */
+    --secondary-600: 128 118 225;
+    --secondary-700: 112 101 205;
+    --secondary-800: 92 83 168;
+    --secondary-900: 75 67 137;
+
+    /* Neutral / Gray */
+    --gray-50: 250 250 250;
+    --gray-100: 244 244 245;
+    --gray-200: 228 228 231;
+    --gray-300: 212 212 216;
+    --gray-400: 161 161 170;
+    --gray-500: 113 113 122;
+    --gray-600: 82 82 91;
+    --gray-700: 63 63 70;
+    --gray-800: 39 39 42;
+    --gray-900: 24 24 27;
+
+    /* Semantic aliases */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
+  }
+
+  /* 🌙 Dark-mode overrides (media-agnostic – Tailwind’s dark class strategy) */
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 262.1 83.3% 57.8%;
+  }
+}
+
+/* Korean design system colors */
+.korean {
+  --primary: 0 100% 50%; /* Korean red */
+  --secondary: 240 100% 50%; /* Korean blue */
+}
+
+/* Chinese design system colors */
+.chinese {
+  --primary: 0 100% 45%; /* Chinese red */
+  --secondary: 60 100% 50%; /* Chinese gold */
+}
+
+/* Korean-inspired design tokens */
+.korean-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.korean-card {
+  @apply bg-white rounded-2xl shadow-lg border border-gray-100;
+}
+
+.korean-button {
+  @apply rounded-xl font-medium transition-all duration-200;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Screen reader only utility */
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 2️⃣  Global element resets / typography tweaks
+   -------------------------------------------------- */
+@layer base {
+  /* Make REM-based sizing easier to reason about */
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: "Inter", system-ui, sans-serif;
+    @apply antialiased bg-background text-foreground;
+  }
+
+  a {
+    color: hsl(var(--primary-600));
+    @apply underline-offset-2;
+  }
+
+  a:hover {
+    color: hsl(var(--primary-700));
+  }
+
+  /* Helper utility to visually hide (but keep accessible) */
+  .visually-hidden {
+    @apply sr-only;
+  }
+
+  /* Apply border and background to all elements */
+  * {
+    @apply border-border;
+  }
+}
+
+/* 3️⃣  Component layer overrides / utilities
+   -------------------------------------------------- */
+/* Example custom utility – subtle card shadow */
+@layer components {
+  .won-card {
+    background-color: hsl(var(--card));
+    color: hsl(var(--card-foreground));
+    @apply rounded-lg shadow-sm;
+  }
+}

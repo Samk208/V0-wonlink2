@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Wonlink</string>
+    <string name="title_activity_main">Wonlink</string>
+    <string name="package_name">com.wonlink.app</string>
+    <string name="custom_url_scheme">com.wonlink.app</string>
+    
+    <!-- Korean Localization -->
+    <string name="app_name_ko">원링크</string>
+    <string name="notification_channel_name">Wonlink Notifications</string>
+    <string name="notification_channel_description">Receive updates about campaigns and earnings</string>
+    
+    <!-- Permissions -->
+    <string name="camera_permission_description">Take photos for campaign content</string>
+    <string name="storage_permission_description">Save and access campaign materials</string>
+    <string name="location_permission_description">Find local campaigns and events</string>
+</resources>
