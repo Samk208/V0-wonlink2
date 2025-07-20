@@ -7,7 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { LanguageSelector } from "./language-selector"
 import { useApp } from "@/app/providers"
 import { useTranslation } from "@/lib/translations"
-import { Bell, Menu, User, LogOut, Settings, Wallet, Home } from "lucide-react"
+import { Bell, Menu, User, LogOut, Settings, Wallet, Home, Upload } from "lucide-react"
 import Link from "next/link"
 
 interface EnhancedHeaderProps {
@@ -17,7 +17,7 @@ interface EnhancedHeaderProps {
 
 export function EnhancedHeader({ variant = "landing", transparent = false }: EnhancedHeaderProps) {
   const { language, user, setUser, isAuthenticated } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -70,20 +70,28 @@ export function EnhancedHeader({ variant = "landing", transparent = false }: Enh
               <Link href={`${baseUrl}/dashboard`}>
                 <Button variant="ghost" size="sm" className="korean-button">
                   <Home className="w-4 h-4 mr-2" />
-                  {t.dashboard}
+                  {t("dashboard")}
                 </Button>
               </Link>
               <Link href={`${baseUrl}/campaigns`}>
                 <Button variant="ghost" size="sm" className="korean-button">
-                  {t.campaigns}
+                  {t("campaigns")}
                 </Button>
               </Link>
               <Link href={`${baseUrl}/wallet`}>
                 <Button variant="ghost" size="sm" className="korean-button">
                   <Wallet className="w-4 h-4 mr-2" />
-                  {t.wallet}
+                  {t("wallet")}
                 </Button>
               </Link>
+              {user?.role === "brand" && (
+                <Link href="/import-export">
+                  <Button variant="ghost" size="sm" className="korean-button">
+                    <Upload className="w-4 h-4 mr-2" />
+                    {t("importExport")}
+                  </Button>
+                </Link>
+              )}
             </nav>
           )}
 
@@ -119,18 +127,18 @@ export function EnhancedHeader({ variant = "landing", transparent = false }: Enh
                   <DropdownMenuItem asChild>
                     <Link href={`${baseUrl}/profile`} className="flex items-center">
                       <User className="w-4 h-4 mr-2" />
-                      {t.profile}
+                      {t("profile")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href={`${baseUrl}/settings`} className="flex items-center">
                       <Settings className="w-4 h-4 mr-2" />
-                      {t.settings}
+                      {t("settings")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600">
                     <LogOut className="w-4 h-4 mr-2" />
-                    {t.logout}
+                    {t("logout")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -139,7 +147,7 @@ export function EnhancedHeader({ variant = "landing", transparent = false }: Enh
               <div className="flex items-center space-x-2">
                 <Link href="/auth">
                   <Button variant="ghost" size="sm" className="korean-button hidden sm:inline-flex">
-                    {t.login}
+                    {t("login")}
                   </Button>
                 </Link>
                 <Link href="/auth">
@@ -147,7 +155,7 @@ export function EnhancedHeader({ variant = "landing", transparent = false }: Enh
                     size="sm"
                     className="korean-button korean-gradient text-white hover:shadow-lg hover:scale-105"
                   >
-                    {t.getStarted}
+                    {t("getStarted")}
                   </Button>
                 </Link>
               </div>
@@ -167,10 +175,10 @@ export function EnhancedHeader({ variant = "landing", transparent = false }: Enh
                 {!isAuthenticated && (
                   <>
                     <DropdownMenuItem asChild>
-                      <Link href="/auth">{t.login}</Link>
+                      <Link href="/auth">{t("login")}</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/auth">{t.getStarted}</Link>
+                      <Link href="/auth">{t("getStarted")}</Link>
                     </DropdownMenuItem>
                   </>
                 )}

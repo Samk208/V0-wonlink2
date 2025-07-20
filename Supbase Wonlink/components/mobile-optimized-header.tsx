@@ -26,7 +26,7 @@ export function MobileOptimizedHeader({
   title,
 }: MobileOptimizedHeaderProps) {
   const { language, user, setUser, isAuthenticated } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
   const platform = usePlatform()
   const router = useRouter()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -145,19 +145,19 @@ export function MobileOptimizedHeader({
                   <DropdownMenuItem asChild>
                     <Link href={`${baseUrl}/profile`} className="flex items-center">
                       <User className="w-4 h-4 mr-2" />
-                      {t.profile}
+                      {t("profile")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href={`${baseUrl}/wallet`} className="flex items-center">
                       <Wallet className="w-4 h-4 mr-2" />
-                      {t.wallet}
+                      {t("wallet")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href={`${baseUrl}/settings`} className="flex items-center">
                       <Settings className="w-4 h-4 mr-2" />
-                      {t.settings}
+                      {t("settings")}
                     </Link>
                   </DropdownMenuItem>
                   <div className="md:hidden p-2 border-t border-gray-100">
@@ -165,7 +165,7 @@ export function MobileOptimizedHeader({
                   </div>
                   <DropdownMenuItem onClick={handleLogout} className="text-red-600">
                     <LogOut className="w-4 h-4 mr-2" />
-                    {t.logout}
+                    {t("logout")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -174,7 +174,7 @@ export function MobileOptimizedHeader({
               <div className="flex items-center space-x-2">
                 <Link href="/auth">
                   <Button variant="ghost" size="sm" className="korean-button hidden sm:inline-flex">
-                    {t.login}
+                    {t("login")}
                   </Button>
                 </Link>
                 <Link href="/auth">
@@ -182,7 +182,7 @@ export function MobileOptimizedHeader({
                     size="sm"
                     className="korean-button korean-gradient text-white hover:shadow-lg hover:scale-105 px-4"
                   >
-                    {t.getStarted}
+                    {t("getStarted")}
                   </Button>
                 </Link>
               </div>

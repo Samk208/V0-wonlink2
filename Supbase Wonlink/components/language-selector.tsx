@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useApp } from "@/app/providers"
 import { Globe, Check } from "lucide-react"
+import { HydrationBoundary } from "@/components/hydration-boundary"
 
 export function LanguageSelector() {
   const { language, setLanguage } = useApp()
@@ -16,33 +17,43 @@ export function LanguageSelector() {
 
   const currentLanguage = languages.find((lang) => lang.code === language)
 
+  const fallback = (
+    <Button variant="ghost" size="sm" className="korean-button flex items-center space-x-2 hover:bg-white/10">
+      <Globe className="w-4 h-4" />
+      <span className="hidden sm:inline">🌐</span>
+      <span className="hidden md:inline">Language</span>
+    </Button>
+  )
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="korean-button flex items-center space-x-2 hover:bg-white/10">
-          <Globe className="w-4 h-4" />
-          <span className="hidden sm:inline">{currentLanguage?.flag}</span>
-          <span className="hidden md:inline">{currentLanguage?.nativeName}</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48 korean-card">
-        {languages.map((lang) => (
-          <DropdownMenuItem
-            key={lang.code}
-            onClick={() => setLanguage(lang.code)}
-            className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-3"
-          >
-            <div className="flex items-center space-x-3">
-              <span className="text-lg">{lang.flag}</span>
-              <div>
-                <div className="font-medium">{lang.nativeName}</div>
-                <div className="text-xs text-gray-500">{lang.name}</div>
+    <HydrationBoundary fallback={fallback}>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="korean-button flex items-center space-x-2 hover:bg-white/10">
+            <Globe className="w-4 h-4" />
+            <span className="hidden sm:inline">{currentLanguage?.flag}</span>
+            <span className="hidden md:inline">{currentLanguage?.nativeName}</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48 korean-card">
+          {languages.map((lang) => (
+            <DropdownMenuItem
+              key={lang.code}
+              onClick={() => setLanguage(lang.code)}
+              className="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-3"
+            >
+              <div className="flex items-center space-x-3">
+                <span className="text-lg">{lang.flag}</span>
+                <div>
+                  <div className="font-medium">{lang.nativeName}</div>
+                  <div className="text-xs text-gray-500">{lang.name}</div>
+                </div>
               </div>
-            </div>
-            {language === lang.code && <Check className="w-4 h-4 text-purple-600" />}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+              {language === lang.code && <Check className="w-4 h-4 text-purple-600" />}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </HydrationBoundary>
   )
 }

@@ -9,7 +9,13 @@
       "Bash(npm run build:*)",
       "Bash(npx tsc:*)",
       "Bash(npm run lint)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(pkill:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npm run:*)",
+      "Bash(npm audit:*)",
+      "Bash(timeout 30s npm run dev)"
     ],
     "deny": []
   }

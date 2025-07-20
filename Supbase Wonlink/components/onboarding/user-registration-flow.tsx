@@ -36,7 +36,7 @@ interface RegistrationStep {
 
 export function UserRegistrationFlow() {
   const { language } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
   const router = useRouter()
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -66,13 +66,13 @@ export function UserRegistrationFlow() {
   const steps: RegistrationStep[] = [
     {
       id: "oauth",
-      title: t.selectLoginMethod,
+      title: t("selectLoginMethod"),
       description: "Choose your preferred login method",
       completed: currentStep > 0,
     },
     {
       id: "role",
-      title: t.selectRole,
+      title: t("selectRole"),
       description: "Tell us how you'll use Wonlink",
       completed: currentStep > 1,
     },
@@ -142,12 +142,12 @@ export function UserRegistrationFlow() {
                 <span className="text-white font-bold">W</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Welcome to Wonlink</h1>
-                <p className="text-gray-600">Let's get you set up in just a few steps</p>
+                <h1 className="text-2xl font-bold text-gray-900">{t("welcomeToWonlink")}</h1>
+                <p className="text-gray-600">{t("getSetupFewSteps")}</p>
               </div>
             </div>
             <Badge variant="outline" className="px-3 py-1">
-              Step {currentStep + 1} of {steps.length}
+              {t("stepOf").replace("{current}", String(currentStep + 1)).replace("{total}", String(steps.length))}
             </Badge>
           </div>
 
@@ -234,8 +234,8 @@ export function UserRegistrationFlow() {
           {currentStep === 1 && (
             <CardContent className="p-8">
               <div className="text-center mb-8">
-                <h2 className="text-2xl font-bold mb-2">How will you use Wonlink?</h2>
-                <p className="text-gray-600">Choose the option that best describes you</p>
+                <h2 className="text-2xl font-bold mb-2">{t("howWillYouUseWonlink")}</h2>
+                <p className="text-gray-600">{t("chooseBestDescribes")}</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -251,8 +251,8 @@ export function UserRegistrationFlow() {
                     <div className="w-16 h-16 bg-gradient-to-r from-purple-100 to-purple-200 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Building2 className="w-8 h-8 text-purple-600" />
                     </div>
-                    <CardTitle className="text-xl">I'm a Brand</CardTitle>
-                    <CardDescription>I want to collaborate with influencers</CardDescription>
+                    <CardTitle className="text-xl">{t("imABrand")}</CardTitle>
+                    <CardDescription>{t("collaborateWithInfluencers")}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm text-gray-600">

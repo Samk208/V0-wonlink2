@@ -1,0 +1,4 @@
+name,price,category,brand,description,sku
+"Test Product 1",29.99,"Fashion","Test Brand","A great product for testing","SKU-001"
+"Test Product 2",45.50,"Beauty","Beauty Co","Another test product","SKU-002"
+"Test Product 3",15.99,"Electronics","Tech Corp","Electronic test item","SKU-003"

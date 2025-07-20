@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Wonlink - 브랜드와 인플루언서를 연결하는 플랫폼",
   description: "소규모 브랜드의 인플루언서 마케팅 캠페인 런칭부터 인플루언서의 수익화까지",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -18,10 +18,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Use default language for SSR - providers will handle client-side language detection
+  const serverLanguage = "en"
+  
   return (
-    <html lang="en">
+    <html lang={serverLanguage}>
       <body className={inter.className}>
-        <Providers>
+        <Providers initialLanguage={serverLanguage}>
           {children}
           <Toaster />
         </Providers>

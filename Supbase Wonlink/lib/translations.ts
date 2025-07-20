@@ -1,3 +1,6 @@
+import { useState, useEffect, useCallback } from 'react'
+import { getClientLanguage, SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from './language-utils'
+
 export const translations = {
   en: {
     // Common
@@ -47,6 +50,19 @@ export const translations = {
     help: "Help",
     settings: "Settings",
     signup: "Sign Up",
+    browseCampaigns: "Browse Campaigns",
+    myApplications: "My Applications",
+    earnings: "Earnings",
+    createCampaign: "Create Campaign",
+    identityVerification: "Identity Verification",
+    businessVerification: "Business Verification",
+    financialInformation: "Financial Information",
+    socialMediaVerification: "Social Media Verification",
+    uploadGovernmentId: "Upload government-issued ID",
+    businessLicenseRegistration: "Business license and registration",
+    bankAccountTaxDetails: "Bank account and tax details",
+    verifySocialMediaAccounts: "Verify your social media accounts",
+    accountVerification: "Account Verification",
 
     // Onboarding
     selectLanguage: "Select Your Language",
@@ -56,6 +72,30 @@ export const translations = {
     brandDescription: "Create and manage influencer marketing campaigns",
     influencerDescription: "Monetize your social media influence",
     continueAsRole: "Continue as {role}",
+    accountSetup: "Account Setup",
+    customizedExperience: "We'll provide a customized experience with a few questions",
+    stepOf: "Step {current} of {total}",
+    percentComplete: "{percent}% complete",
+    whatTypeOfUser: "What type of user are you?",
+    selectOptimalExperience: "Please select to provide the optimal experience for your role",
+    brandCompany: "Brand/Company",
+    createManageInfluencerCampaigns: "Create and manage influencer marketing campaigns",
+    influencer: "Influencer",
+    monetizeSocialMediaInfluence: "Monetize your social media influence",
+    participateApplyCampaigns: "Participate and apply to campaigns",
+    revenueManagementSettlement: "Revenue management and settlement",
+    profilePortfolioManagement: "Profile and portfolio management",
+    createManageCampaigns: "Create and manage campaigns",
+    searchMatchInfluencers: "Search and match influencers",
+    performanceAnalysisReports: "Performance analysis and reports",
+    welcomeToWonlink: "Welcome to Wonlink",
+    getSetupFewSteps: "Let's get you set up in just a few steps",
+    howWillYouUseWonlink: "How will you use Wonlink?",
+    chooseBestDescribes: "Choose the option that best describes you",
+    imABrand: "I'm a Brand",
+    collaborateWithInfluencers: "I want to collaborate with influencers",
+    previous: "previous",
+    next: "next",
 
     // Authentication
     loginWithKakao: "Login with Kakao",
@@ -67,7 +107,6 @@ export const translations = {
     email: "Email",
     password: "Password",
     goBack: "Go Back",
-    welcomeToWonlink: "Welcome to Wonlink",
     loginOrCreateAccount: "Login to your account or create a new one",
     loginTab: "Login",
     registerTab: "Sign Up",
@@ -90,13 +129,9 @@ export const translations = {
     agreementSuffix: "by continuing.",
 
     // Onboarding
-    accountSetup: "Account Setup",
-    customizedExperience: "We'll provide a customized experience with a few questions",
     stepProgress: "Step {step} of {total}",
-    percentComplete: "{percent}% complete",
     userTypeQuestion: "What type of user are you?",
     userTypeDescription: "Please select to provide the optimal experience for your role",
-    brandCompany: "Brand/Company",
     brandFeature1: "• Create and manage campaigns",
     brandFeature2: "• Search and match influencers",
     brandFeature3: "• Performance analysis and reports",
@@ -152,8 +187,6 @@ export const translations = {
 
     // Influencer Dashboard
     availableCampaigns: "Available Campaigns",
-    myApplications: "My Applications",
-    earnings: "Earnings",
     followers: "Followers",
     participatedCampaigns: "Participated Campaigns",
     totalEarnings: "Total Earnings",
@@ -166,7 +199,6 @@ export const translations = {
     expectedReward: "Expected Reward",
     applicationStatus: "Status",
     underReview: "Under Review",
-    browseCampaigns: "Browse Campaigns",
     portfolio: "Portfolio",
 
     // Wallet - Brand
@@ -396,9 +428,6 @@ export const translations = {
     // Verification Page
     verification: "Verification",
     verificationProcess: "Verification Process",
-    identityVerification: "Identity Verification",
-    uploadGovernmentId: "Upload government-issued ID",
-    businessVerification: "Business Verification",
     uploadBusinessDocuments: "Upload business documents",
     addressVerification: "Address Verification",
     confirmYourAddress: "Confirm your address",
@@ -431,7 +460,6 @@ export const translations = {
     
     // Dashboard Content
     manageOngoingCampaigns: "Manage your ongoing influencer campaigns",
-    createCampaign: "Create Campaign",
     recentApplications: "Recent Applications",
     reviewNewApplications: "Review new influencer applications",
     viewAll: "View All",
@@ -474,6 +502,81 @@ export const translations = {
     techProductReview: "Tech Product Review",
     seoulFashion: "Seoul Fashion",
     techKorea: "TechKorea",
+
+    // Import/Export functionality
+    importExport: "Import/Export",
+    importExportTitle: "Product Import/Export",
+    importExportSubtitle: "Manage your product catalogs and campaign data efficiently",
+    
+    // Import Section
+    importTitle: "Import Products",
+    importDropZoneIdle: "Drop your CSV, Excel, or JSON file here",
+    importDropZoneUploading: "Uploading...",
+    importDropZoneProcessing: "Processing data and validating...",
+    importDropZoneComplete: "Import completed successfully!",
+    importDropZoneError: "Error: Please check file format and try again",
+    importDropZoneFormats: "Supports CSV, Excel (.xlsx), and JSON formats",
+    importChooseFile: "Choose File",
+    importRequiredColumns: "Required Columns:",
+    importColumnProductName: "Product Name",
+    importColumnPrice: "Price",
+    importColumnCategory: "Category",
+    importColumnDescription: "Description",
+    importColumnRequired: "Required",
+    importColumnOptional: "Optional",
+    
+    // Export Section
+    exportTitle: "Export Data",
+    exportProductCatalogTitle: "Product Catalog",
+    exportProductCatalogDescription: "Export all products with pricing, categories, and metadata",
+    exportCampaignDataTitle: "Campaign Data",
+    exportCampaignDataDescription: "Export campaign performance metrics and ROI data",
+    exportAnalyticsTitle: "Analytics Report",
+    exportAnalyticsDescription: "Export detailed analytics and performance insights",
+    exportButtonCSV: "Export CSV",
+    exportButtonExcel: "Export Excel",
+    exportButtonPDF: "Export PDF",
+    
+    // Recent Imports
+    recentTitle: "Recent Imports",
+    recentRecords: "records",
+    recentStatusCompleted: "completed",
+    recentStatusProcessing: "processing",
+    recentStatusError: "error",
+    recentViewDetails: "View Details",
+    
+    // File Processing
+    fileValidationInvalidFormat: "Invalid file format. Please use CSV, Excel, or JSON.",
+    fileValidationTooLarge: "File is too large. Maximum size is 10MB.",
+    fileValidationEmpty: "File is empty. Please select a file with data.",
+    fileValidationMissingColumns: "Missing required columns: {columns}",
+    fileValidationInvalidData: "Invalid data in row {row}: {error}",
+    fileProcessingStarted: "File processing started",
+    fileProcessingProgress: "Processing {current} of {total} records",
+    fileProcessingCompleted: "Successfully processed {count} records",
+    fileProcessingFailed: "Processing failed: {error}",
+    fileUploadSuccess: "File uploaded successfully",
+    fileUploadFailed: "Upload failed: {error}",
+    fileDownloadPreparing: "Preparing download...",
+    fileDownloadReady: "Download ready",
+    fileTemplateDownload: "Download Template",
+    
+    // Product Fields
+    productFieldName: "Product Name",
+    productFieldDescription: "Description",
+    productFieldPrice: "Price",
+    productFieldCategory: "Category",
+    productFieldBrand: "Brand",
+    productFieldSKU: "SKU",
+    productFieldImageUrl: "Image URL",
+    productFieldTags: "Tags",
+    productFieldAvailability: "Availability",
+    productFieldCommission: "Commission Rate",
+    
+    // Time expressions
+    timeHoursAgo: "hours ago",
+    timeDayAgo: "day ago",
+    timeDaysAgo: "days ago",
   },
   ko: {
     // Navigation
@@ -952,6 +1055,81 @@ export const translations = {
     techProductReview: "테크 제품 리뷰",
     seoulFashion: "서울 패션",
     techKorea: "테크 코리아",
+
+    // Import/Export functionality
+    importExport: "가져오기/내보내기",
+    importExportTitle: "제품 가져오기/내보내기",
+    importExportSubtitle: "제품 카탈로그와 캠페인 데이터를 효율적으로 관리하세요",
+    
+    // Import Section
+    importTitle: "제품 가져오기",
+    importDropZoneIdle: "CSV, Excel 또는 JSON 파일을 여기에 놓으세요",
+    importDropZoneUploading: "업로드 중...",
+    importDropZoneProcessing: "데이터 처리 및 검증 중...",
+    importDropZoneComplete: "가져오기가 성공적으로 완료되었습니다!",
+    importDropZoneError: "오류: 파일 형식을 확인하고 다시 시도해주세요",
+    importDropZoneFormats: "CSV, Excel (.xlsx), JSON 형식을 지원합니다",
+    importChooseFile: "파일 선택",
+    importRequiredColumns: "필수 열:",
+    importColumnProductName: "제품명",
+    importColumnPrice: "가격",
+    importColumnCategory: "카테고리",
+    importColumnDescription: "설명",
+    importColumnRequired: "필수",
+    importColumnOptional: "선택사항",
+    
+    // Export Section
+    exportTitle: "데이터 내보내기",
+    exportProductCatalogTitle: "제품 카탈로그",
+    exportProductCatalogDescription: "가격, 카테고리, 메타데이터가 포함된 모든 제품을 내보냅니다",
+    exportCampaignDataTitle: "캠페인 데이터",
+    exportCampaignDataDescription: "캠페인 성과 지표와 ROI 데이터를 내보냅니다",
+    exportAnalyticsTitle: "분석 보고서",
+    exportAnalyticsDescription: "상세한 분석 및 성과 인사이트를 내보냅니다",
+    exportButtonCSV: "CSV 내보내기",
+    exportButtonExcel: "Excel 내보내기",
+    exportButtonPDF: "PDF 내보내기",
+    
+    // Recent Imports
+    recentTitle: "최근 가져오기",
+    recentRecords: "개 레코드",
+    recentStatusCompleted: "완료됨",
+    recentStatusProcessing: "처리 중",
+    recentStatusError: "오류",
+    recentViewDetails: "세부정보 보기",
+    
+    // File Processing
+    fileValidationInvalidFormat: "잘못된 파일 형식입니다. CSV, Excel 또는 JSON을 사용해주세요.",
+    fileValidationTooLarge: "파일이 너무 큽니다. 최대 크기는 10MB입니다.",
+    fileValidationEmpty: "파일이 비어있습니다. 데이터가 있는 파일을 선택해주세요.",
+    fileValidationMissingColumns: "필수 열이 누락되었습니다: {columns}",
+    fileValidationInvalidData: "{row}행에 잘못된 데이터가 있습니다: {error}",
+    fileProcessingStarted: "파일 처리가 시작되었습니다",
+    fileProcessingProgress: "{total}개 중 {current}개 레코드 처리 중",
+    fileProcessingCompleted: "{count}개 레코드를 성공적으로 처리했습니다",
+    fileProcessingFailed: "처리 실패: {error}",
+    fileUploadSuccess: "파일이 성공적으로 업로드되었습니다",
+    fileUploadFailed: "업로드 실패: {error}",
+    fileDownloadPreparing: "다운로드 준비 중...",
+    fileDownloadReady: "다운로드 준비 완료",
+    fileTemplateDownload: "템플릿 다운로드",
+    
+    // Product Fields
+    productFieldName: "제품명",
+    productFieldDescription: "설명",
+    productFieldPrice: "가격",
+    productFieldCategory: "카테고리",
+    productFieldBrand: "브랜드",
+    productFieldSKU: "SKU",
+    productFieldImageUrl: "이미지 URL",
+    productFieldTags: "태그",
+    productFieldAvailability: "재고 상태",
+    productFieldCommission: "수수료율",
+    
+    // Time expressions
+    timeHoursAgo: "시간 전",
+    timeDayAgo: "일 전",
+    timeDaysAgo: "일 전",
   },
   zh: {
     // Navigation
@@ -1368,6 +1546,81 @@ export const translations = {
     techProductReview: "科技产品评测",
     seoulFashion: "首尔时尚",
     techKorea: "韩国科技",
+
+    // Import/Export functionality
+    importExport: "导入/导出",
+    importExportTitle: "产品导入/导出",
+    importExportSubtitle: "高效管理您的产品目录和营销活动数据",
+    
+    // Import Section
+    importTitle: "导入产品",
+    importDropZoneIdle: "将您的CSV、Excel或JSON文件拖放到这里",
+    importDropZoneUploading: "上传中...",
+    importDropZoneProcessing: "正在处理数据并验证...",
+    importDropZoneComplete: "导入成功完成！",
+    importDropZoneError: "错误：请检查文件格式并重试",
+    importDropZoneFormats: "支持CSV、Excel (.xlsx)和JSON格式",
+    importChooseFile: "选择文件",
+    importRequiredColumns: "必需列：",
+    importColumnProductName: "产品名称",
+    importColumnPrice: "价格",
+    importColumnCategory: "类别",
+    importColumnDescription: "描述",
+    importColumnRequired: "必需",
+    importColumnOptional: "可选",
+    
+    // Export Section
+    exportTitle: "导出数据",
+    exportProductCatalogTitle: "产品目录",
+    exportProductCatalogDescription: "导出包含价格、类别和元数据的所有产品",
+    exportCampaignDataTitle: "营销活动数据",
+    exportCampaignDataDescription: "导出营销活动表现指标和投资回报率数据",
+    exportAnalyticsTitle: "分析报告",
+    exportAnalyticsDescription: "导出详细的分析和表现洞察",
+    exportButtonCSV: "导出CSV",
+    exportButtonExcel: "导出Excel",
+    exportButtonPDF: "导出PDF",
+    
+    // Recent Imports
+    recentTitle: "最近导入",
+    recentRecords: "条记录",
+    recentStatusCompleted: "已完成",
+    recentStatusProcessing: "处理中",
+    recentStatusError: "错误",
+    recentViewDetails: "查看详情",
+    
+    // File Processing
+    fileValidationInvalidFormat: "文件格式无效。请使用CSV、Excel或JSON格式。",
+    fileValidationTooLarge: "文件过大。最大大小为10MB。",
+    fileValidationEmpty: "文件为空。请选择包含数据的文件。",
+    fileValidationMissingColumns: "缺少必需列：{columns}",
+    fileValidationInvalidData: "第{row}行数据无效：{error}",
+    fileProcessingStarted: "文件处理已开始",
+    fileProcessingProgress: "正在处理第{current}/{total}条记录",
+    fileProcessingCompleted: "成功处理了{count}条记录",
+    fileProcessingFailed: "处理失败：{error}",
+    fileUploadSuccess: "文件上传成功",
+    fileUploadFailed: "上传失败：{error}",
+    fileDownloadPreparing: "正在准备下载...",
+    fileDownloadReady: "下载已准备就绪",
+    fileTemplateDownload: "下载模板",
+    
+    // Product Fields
+    productFieldName: "产品名称",
+    productFieldDescription: "描述",
+    productFieldPrice: "价格",
+    productFieldCategory: "类别",
+    productFieldBrand: "品牌",
+    productFieldSKU: "SKU",
+    productFieldImageUrl: "图片URL",
+    productFieldTags: "标签",
+    productFieldAvailability: "库存状态",
+    productFieldCommission: "佣金率",
+    
+    // Time expressions
+    timeHoursAgo: "小时前",
+    timeDayAgo: "天前",
+    timeDaysAgo: "天前",
   },
 }
 
@@ -1387,5 +1640,70 @@ export function useTranslation(lang: Language = "en") {
   return {
     t,
     lang,
+  }
+}
+
+// Server-side translation function for SSR compatibility
+export function getTranslations(lang: Language = "en") {
+  const t = (key: string): string => {
+    // Type-safe access with fallback
+    const langTranslations = translations[lang] as Record<string, string>
+    const enTranslations = translations.en as Record<string, string>
+    
+    return langTranslations[key] || enTranslations[key] || key
+  }
+  
+  return {
+    t,
+    lang,
+  }
+}
+
+// Server-side language detection for SSR
+export async function getServerSideLanguage(): Promise<Language> {
+  // This will be called from server components
+  // and should use the language set by middleware in headers
+  try {
+    const { headers } = await import('next/headers')
+    const headersList = headers()
+    const language = headersList.get('x-language') as Language
+    
+    if (language && SUPPORTED_LANGUAGES.includes(language)) {
+      return language
+    }
+  } catch (error) {
+    // Headers not available or error reading them
+    console.warn('Failed to read language from headers:', error)
+  }
+  
+  return DEFAULT_LANGUAGE
+}
+
+// Enhanced client-side hook with hydration safety
+export function useClientTranslation(serverLanguage?: Language) {
+  const [language, setLanguage] = useState<Language>(serverLanguage || DEFAULT_LANGUAGE)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  useEffect(() => {
+    // Only run on client after hydration
+    const clientLanguage = getClientLanguage()
+    if (clientLanguage !== language) {
+      setLanguage(clientLanguage)
+    }
+    setIsHydrated(true)
+  }, [language])
+
+  const t = useCallback((key: string): string => {
+    // Type-safe access with fallback
+    const langTranslations = translations[language] as Record<string, string>
+    const enTranslations = translations.en as Record<string, string>
+    
+    return langTranslations[key] || enTranslations[key] || key
+  }, [language])
+
+  return {
+    t,
+    lang: language,
+    isHydrated,
   }
 }

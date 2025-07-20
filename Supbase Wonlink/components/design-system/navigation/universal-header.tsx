@@ -35,7 +35,7 @@ export function UniversalHeader({
   className,
 }: UniversalHeaderProps) {
   const { language, user, setUser, isAuthenticated } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
   const platform = usePlatform()
   const { theme, setTheme, resolvedTheme } = useTheme()
   const router = useRouter()
@@ -119,7 +119,7 @@ export function UniversalHeader({
               size="sm"
               className="transition-all duration-200"
             >
-              {t.dashboard}
+              {t("dashboard")}
             </Button>
           </Link>
           <Link href={`${baseUrl}/campaigns`}>
@@ -128,7 +128,7 @@ export function UniversalHeader({
               size="sm"
               className="transition-all duration-200"
             >
-              {t.campaigns}
+              {t("campaigns")}
             </Button>
           </Link>
           <Link href={`${baseUrl}/wallet`}>
@@ -138,7 +138,7 @@ export function UniversalHeader({
               className="transition-all duration-200"
             >
               <Wallet className="w-4 h-4 mr-2" />
-              {t.wallet}
+              {t("wallet")}
             </Button>
           </Link>
         </nav>
@@ -171,21 +171,21 @@ export function UniversalHeader({
           <DropdownMenuItem asChild>
             <Link href={`${baseUrl}/profile`} className="flex items-center">
               <User className="w-4 h-4 mr-3" />
-              {t.profile}
+              {t("profile")}
             </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
             <Link href={`${baseUrl}/wallet`} className="flex items-center">
               <Wallet className="w-4 h-4 mr-3" />
-              {t.wallet}
+              {t("wallet")}
             </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
             <Link href={`${baseUrl}/settings`} className="flex items-center">
               <Settings className="w-4 h-4 mr-3" />
-              {t.settings}
+              {t("settings")}
             </Link>
           </DropdownMenuItem>
 
@@ -228,7 +228,7 @@ export function UniversalHeader({
 
           <DropdownMenuItem onClick={handleLogout} className="text-red-600 dark:text-red-400">
             <LogOut className="w-4 h-4 mr-3" />
-            {t.logout}
+            {t("logout")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -307,7 +307,7 @@ export function UniversalHeader({
               <div className="flex items-center space-x-2">
                 <Link href="/auth">
                   <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
-                    {t.login}
+                    {t("login")}
                   </Button>
                 </Link>
                 <Link href="/auth">
@@ -315,7 +315,7 @@ export function UniversalHeader({
                     size="sm"
                     className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white hover:shadow-lg hover:scale-105 transition-all duration-200"
                   >
-                    {t.getStarted}
+                    {t("getStarted")}
                   </Button>
                 </Link>
               </div>
@@ -335,10 +335,10 @@ export function UniversalHeader({
                 {!isAuthenticated && variant !== "auth" && (
                   <>
                     <DropdownMenuItem asChild>
-                      <Link href="/auth">{t.login}</Link>
+                      <Link href="/auth">{t("login")}</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/auth">{t.getStarted}</Link>
+                      <Link href="/auth">{t("getStarted")}</Link>
                     </DropdownMenuItem>
                   </>
                 )}

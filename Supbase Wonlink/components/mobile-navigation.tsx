@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation"
 
 export function MobileNavigation() {
   const { language, user, isAuthenticated } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
   const platform = usePlatform()
   const pathname = usePathname()
 
@@ -22,19 +22,19 @@ export function MobileNavigation() {
   const navItems = [
     {
       icon: Home,
-      label: t.dashboard,
+      label: t("dashboard"),
       href: `${baseUrl}/dashboard`,
       active: pathname === `${baseUrl}/dashboard`,
     },
     {
       icon: Search,
-      label: t.campaigns,
+      label: t("campaigns"),
       href: `${baseUrl}/campaigns`,
       active: pathname.includes("/campaigns"),
     },
     {
       icon: Plus,
-      label: user.role === "brand" ? t.createCampaign : t.apply,
+      label: user.role === "brand" ? t("createCampaign") : t("apply"),
       href: user.role === "brand" ? `${baseUrl}/campaigns/create` : `${baseUrl}/campaigns/browse`,
       active: false,
       primary: true,
@@ -48,7 +48,7 @@ export function MobileNavigation() {
     },
     {
       icon: User,
-      label: t.profile,
+      label: t("profile"),
       href: `${baseUrl}/profile`,
       active: pathname.includes("/profile"),
     },

@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { ThemeProvider } from "next-themes"
-import { Toaster } from "@/components/ui/toaster"
 import type { Language } from "@/lib/translations"
 
 interface User {
@@ -20,6 +19,7 @@ interface AppContextType {
   user: User | null
   setUser: (user: User | null) => void
   isAuthenticated: boolean
+  isHydrated: boolean
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -32,40 +32,67 @@ export function useApp() {
   return context
 }
 
-export function Providers({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en")
-  const [user, setUser] = useState<User | null>(null)
+interface ProvidersProps {
+  children: ReactNode
+  initialLanguage?: Language
+}
 
-  // Load user from localStorage on mount
+export function Providers({ children, initialLanguage = "en" }: ProvidersProps) {
+  // Use the initialLanguage from server to prevent hydration mismatch
+  const [language, setLanguageState] = useState<Language>(initialLanguage)
+  const [user, setUser] = useState<User | null>(null)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Initialize language from cookies after hydration (SSR-safe)
   useEffect(() => {
-    const savedUser = localStorage.getItem("wonlink-user")
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser))
-      } catch (error) {
-        console.error("Failed to parse saved user:", error)
+    if (typeof window !== 'undefined') {
+      // Simplified client-side language detection
+      const savedLanguage = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('language='))
+        ?.split('=')[1] as Language || 'en'
+      
+      if (savedLanguage !== language) {
+        setLanguageState(savedLanguage)
       }
     }
+    setIsHydrated(true)
+  }, [])
 
-    const savedLanguage = localStorage.getItem("wonlink-language") as Language
-    if (savedLanguage && ["ko", "en", "zh"].includes(savedLanguage)) {
-      setLanguage(savedLanguage)
+  // Load user from localStorage on mount (client-only)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedUser = localStorage.getItem("wonlink-user")
+      if (savedUser) {
+        try {
+          setUser(JSON.parse(savedUser))
+        } catch (error) {
+          console.error("Failed to parse saved user:", error)
+        }
+      }
     }
   }, [])
 
-  // Save user to localStorage when it changes
+  // Save user to localStorage when it changes (client-only)
   useEffect(() => {
-    if (user) {
+    if (typeof window !== 'undefined' && user) {
       localStorage.setItem("wonlink-user", JSON.stringify(user))
-    } else {
+    } else if (typeof window !== 'undefined') {
       localStorage.removeItem("wonlink-user")
     }
   }, [user])
 
-  // Save language to localStorage when it changes
-  useEffect(() => {
-    localStorage.setItem("wonlink-language", language)
-  }, [language])
+  // Enhanced setLanguage function with cookie support
+  const setLanguage = (newLanguage: Language) => {
+    const supportedLanguages: Language[] = ['en', 'ko', 'zh']
+    if (supportedLanguages.includes(newLanguage)) {
+      setLanguageState(newLanguage)
+      // Save to cookie for SSR persistence
+      if (typeof window !== 'undefined') {
+        document.cookie = `language=${newLanguage}; path=/; max-age=31536000`
+      }
+    }
+  }
 
   const value = {
     language,
@@ -73,14 +100,14 @@ export function Providers({ children }: { children: ReactNode }) {
     user,
     setUser,
     isAuthenticated: !!user,
+    isHydrated,
   }
 
   return (
     <AppContext.Provider value={value}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <ThemeProvider attribute="class" defaultTheme="light">
         {children}
       </ThemeProvider>
-      <Toaster />
     </AppContext.Provider>
   )
 }
