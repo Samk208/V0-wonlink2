@@ -1,6 +1,8 @@
 "use client"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useApp } from "@/app/providers"
+import { useTranslation } from "@/lib/translations"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -33,53 +35,55 @@ export function SidebarNavigation({
   className = "",
 }: SidebarNavigationProps) {
   const pathname = usePathname()
+  const { language } = useApp()
+  const { t } = useTranslation(language)
 
   const brandNavItems: NavigationItem[] = [
     {
       id: "dashboard",
-      label: "Dashboard",
+      label: t("dashboard"),
       href: "/brand/dashboard",
       icon: "Home",
     },
     {
       id: "campaigns",
-      label: "Campaigns",
+      label: t("campaigns"),
       href: "/brand/campaigns",
       icon: "Campaign",
       badge: "3",
       children: [
         {
           id: "create-campaign",
-          label: "Create Campaign",
+          label: t("createCampaign"),
           href: "/brand/campaigns/create",
         },
         {
           id: "active-campaigns",
-          label: "Active Campaigns",
+          label: t("activeCampaigns"),
           href: "/brand/campaigns/active",
         },
         {
           id: "draft-campaigns",
-          label: "Drafts",
+          label: t("drafts"),
           href: "/brand/campaigns/drafts",
         },
       ],
     },
     {
       id: "influencers",
-      label: "Influencers",
+      label: t("influencers"),
       href: "/brand/influencers",
       icon: "Users",
     },
     {
       id: "analytics",
-      label: "Analytics",
+      label: t("analytics"),
       href: "/brand/analytics",
       icon: "BarChart3",
     },
     {
       id: "wallet",
-      label: "Wallet",
+      label: t("wallet"),
       href: "/brand/wallet",
       icon: "Wallet",
     },
@@ -88,32 +92,32 @@ export function SidebarNavigation({
   const influencerNavItems: NavigationItem[] = [
     {
       id: "dashboard",
-      label: "Dashboard",
+      label: t("dashboard"),
       href: "/influencer/dashboard",
       icon: "Home",
     },
     {
       id: "campaigns",
-      label: "Browse Campaigns",
+      label: t("browseCampaigns"),
       href: "/influencer/campaigns",
       icon: "Campaign",
     },
     {
       id: "applications",
-      label: "My Applications",
+      label: t("myApplications"),
       href: "/influencer/applications",
       icon: "Users",
       badge: "2",
     },
     {
       id: "analytics",
-      label: "Analytics",
+      label: t("analytics"),
       href: "/influencer/analytics",
       icon: "BarChart3",
     },
     {
       id: "wallet",
-      label: "Earnings",
+      label: t("earnings"),
       href: "/influencer/wallet",
       icon: "Wallet",
     },

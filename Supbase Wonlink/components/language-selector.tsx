@@ -11,6 +11,7 @@ export function LanguageSelector() {
   const languages = [
     { code: "en" as const, name: "English", nativeName: "English", flag: "🇺🇸" },
     { code: "ko" as const, name: "Korean", nativeName: "한국어", flag: "🇰🇷" },
+    { code: "zh" as const, name: "Chinese", nativeName: "中文", flag: "🇨🇳" },
   ]
 
   const currentLanguage = languages.find((lang) => lang.code === language)

@@ -11,27 +11,27 @@ import { Wallet, CreditCard, ArrowUpRight, ArrowDownLeft, Plus, Download, Calend
 
 export default function BrandWalletPage() {
   const { language, user } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
 
   const walletStats = [
     {
-      title: "Available Balance",
+      title: t("accountBalance"),
       value: "₩5,250,000",
       change: "-₩750,000",
       icon: Wallet,
       color: "text-green-600",
     },
     {
-      title: "Pending Payments",
+      title: t("pendingPayments"),
       value: "₩1,200,000",
       change: "3 campaigns",
       icon: Calendar,
       color: "text-orange-600",
     },
     {
-      title: "Total Spent",
+      title: t("monthlySpending"),
       value: "₩12,450,000",
-      change: "This month",
+      change: t("totalCampaignSpending"),
       icon: DollarSign,
       color: "text-blue-600",
     },
@@ -104,13 +104,13 @@ export default function BrandWalletPage() {
   ]
 
   const sidebarItems = [
-    { label: "Dashboard", href: "/brand/dashboard" },
-    { label: "Campaigns", href: "/brand/campaigns" },
-    { label: "Find Influencers", href: "/brand/find" },
-    { label: "Messages", href: "/brand/messages" },
-    { label: "Analytics", href: "/brand/analytics" },
-    { label: "Wallet", href: "/brand/wallet" },
-    { label: "Profile", href: "/profile/brand" },
+    { label: t("dashboard"), href: "/brand/dashboard" },
+    { label: t("campaigns"), href: "/brand/campaigns" },
+    { label: t("findInfluencers"), href: "/brand/find" },
+    { label: t("messages"), href: "/brand/messages" },
+    { label: t("analytics"), href: "/brand/analytics" },
+    { label: t("wallet"), href: "/brand/wallet" },
+    { label: t("profile"), href: "/profile/brand" },
   ]
 
   return (
@@ -119,17 +119,17 @@ export default function BrandWalletPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Wallet</h1>
-            <p className="text-gray-600 mt-2">Manage your payments and transactions</p>
+            <h1 className="text-3xl font-bold text-gray-900">{t("wallet")}</h1>
+            <p className="text-gray-600 mt-2">{t("availableForCampaigns")}</p>
           </div>
           <div className="flex space-x-3">
             <Button variant="outline">
               <Download className="w-4 h-4 mr-2" />
-              Export
+              {t("viewDetails")}
             </Button>
             <Button>
               <Plus className="w-4 h-4 mr-2" />
-              Add Funds
+              {t("topUp")}
             </Button>
           </div>
         </div>
@@ -160,8 +160,8 @@ export default function BrandWalletPage() {
         {/* Main Content */}
         <Tabs defaultValue="transactions" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="transactions">Transaction History</TabsTrigger>
-            <TabsTrigger value="pending">Pending Payments</TabsTrigger>
+            <TabsTrigger value="transactions">{t("transactionHistory")}</TabsTrigger>
+            <TabsTrigger value="pending">{t("pendingPayments")}</TabsTrigger>
             <TabsTrigger value="methods">Payment Methods</TabsTrigger>
           </TabsList>
 

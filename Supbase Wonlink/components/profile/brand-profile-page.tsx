@@ -33,7 +33,7 @@ import {
 
 export function BrandProfilePage() {
   const { language } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
 
   const [isEditing, setIsEditing] = useState(false)
   const [profileData, setProfileData] = useState({
@@ -112,7 +112,7 @@ export function BrandProfilePage() {
   }
 
   return (
-    <EnhancedDashboardLayout title="Brand Profile">
+    <EnhancedDashboardLayout title={t("brandProfile")}>
       <div className="space-y-6">
         {/* Profile Header */}
         <Card className="korean-card">
@@ -137,7 +137,7 @@ export function BrandProfilePage() {
                     <h1 className="text-2xl font-bold">{profileData.companyName}</h1>
                     <Badge variant="secondary" className="bg-green-100 text-green-800">
                       <Shield className="w-3 h-3 mr-1" />
-                      Verified
+                      {t("verified")}
                     </Badge>
                   </div>
                   <p className="text-gray-600 mb-2">{profileData.industry}</p>
@@ -148,18 +148,18 @@ export function BrandProfilePage() {
                     </div>
                     <div className="flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
-                      Founded {profileData.founded}
+                      {t("founded")} {profileData.founded}
                     </div>
                     <div className="flex items-center">
                       <Users className="w-4 h-4 mr-1" />
-                      {profileData.employees} employees
+                      {profileData.employees} {t("employees")}
                     </div>
                   </div>
                 </div>
               </div>
               <Button onClick={() => setIsEditing(!isEditing)} variant="outline" className="korean-button">
                 <Edit className="w-4 h-4 mr-2" />
-                {isEditing ? "Save Changes" : "Edit Profile"}
+                {isEditing ? t("saveProfile") : t("editProfile")}
               </Button>
             </div>
 
@@ -168,12 +168,12 @@ export function BrandProfilePage() {
             <div className="flex items-center space-x-4 mt-4">
               <Button variant="outline" size="sm" className="korean-button bg-transparent">
                 <Globe className="w-4 h-4 mr-2" />
-                Visit Website
+                {t("website")}
                 <ExternalLink className="w-3 h-3 ml-1" />
               </Button>
               <Button variant="outline" size="sm" className="korean-button bg-transparent">
                 <Mail className="w-4 h-4 mr-2" />
-                Contact
+                {t("contactUs")}
               </Button>
             </div>
           </CardContent>

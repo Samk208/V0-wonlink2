@@ -27,46 +27,54 @@ import Link from "next/link"
 
 export default function BrandDashboard() {
   const { language, user } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
 
   const dashboardTabs = [
-    { label: "Overview", href: "/brand/dashboard", icon: BarChart3 },
-    { label: "Active Campaigns", href: "/brand/dashboard/active", icon: Briefcase, badge: 3 },
-    { label: "Applications", href: "/brand/dashboard/applications", icon: Users, badge: 12 },
-    { label: "Messages", href: "/brand/dashboard/messages", icon: MessageCircle, badge: 2 },
+    { label: t("overview"), href: "/brand/dashboard", icon: BarChart3 },
+    { label: t("activeCampaigns"), href: "/brand/dashboard/active", icon: Briefcase, badge: 3 },
+    { label: t("applications"), href: "/brand/dashboard/applications", icon: Users, badge: 12 },
+    { label: t("messages"), href: "/brand/dashboard/messages", icon: MessageCircle, badge: 2 },
   ]
 
   const campaignActions = [
     {
-      label: "Edit",
+      label: t("edit"),
       icon: Edit,
-      onClick: () => console.log("Edit campaign"),
+      onClick: () => {
+        // TODO: Implement edit campaign functionality
+      },
     },
     {
-      label: "Share",
+      label: t("share"),
       icon: Share,
-      onClick: () => console.log("Share campaign"),
+      onClick: () => {
+        // TODO: Implement share campaign functionality
+      },
     },
     {
-      label: "Archive",
+      label: t("archive"),
       icon: Archive,
-      onClick: () => console.log("Archive campaign"),
+      onClick: () => {
+        // TODO: Implement archive campaign functionality
+      },
       variant: "secondary" as const,
     },
     {
-      label: "Delete",
+      label: t("delete"),
       icon: Trash2,
-      onClick: () => console.log("Delete campaign"),
+      onClick: () => {
+        // TODO: Implement delete campaign functionality
+      },
       variant: "destructive" as const,
       separator: true,
     },
   ]
 
-  const breadcrumbs = [{ label: "Dashboard", href: "/brand/dashboard" }, { label: "Overview" }]
+  const breadcrumbs = [{ label: t("dashboard"), href: "/brand/dashboard" }, { label: t("overview") }]
 
   return (
     <EnhancedDashboardLayout
-      title="Brand Dashboard"
+      title={t("dashboard")}
       breadcrumbs={breadcrumbs}
       actions={[
         <GlobalSearch key="search" placeholder="Search campaigns, influencers..." />,
@@ -82,45 +90,45 @@ export default function BrandDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Campaigns</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("activeCampaigns")}</CardTitle>
             <Briefcase className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">3</div>
-            <p className="text-xs text-muted-foreground">+1 from last month</p>
+            <p className="text-xs text-muted-foreground">{t("increaseFromLastMonth").replace("{value}", "1")}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Applications</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("totalApplications")}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">47</div>
-            <p className="text-xs text-muted-foreground">+12 from last week</p>
+            <p className="text-xs text-muted-foreground">{t("increaseFromLastWeek").replace("{value}", "12")}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Campaign Spend</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("campaignSpend")}</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$2,450</div>
-            <p className="text-xs text-muted-foreground">+15% from last month</p>
+            <p className="text-xs text-muted-foreground">{t("percentageIncrease" as any).replace("{value}", "15")}</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Engagement Rate</CardTitle>
+            <CardTitle className="text-sm font-medium">{t("engagementRate")}</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">4.2%</div>
-            <p className="text-xs text-muted-foreground">+0.3% from last month</p>
+            <p className="text-xs text-muted-foreground">{t("percentageIncrease").replace("{value}", "8.2")}</p>
           </CardContent>
         </Card>
       </div>
@@ -130,13 +138,13 @@ export default function BrandDashboard() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Active Campaigns</CardTitle>
-              <CardDescription>Manage your ongoing influencer campaigns</CardDescription>
+              <CardTitle>{t("activeCampaigns")}</CardTitle>
+              <CardDescription>{t("manageOngoingCampaigns")}</CardDescription>
             </div>
             <Link href="/brand/campaigns/create">
               <Button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
                 <Plus className="w-4 h-4 mr-2" />
-                Create Campaign
+                {t("createCampaign")}
               </Button>
             </Link>
           </div>
@@ -154,17 +162,17 @@ export default function BrandDashboard() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-gray-100">
-                      Summer Beauty Campaign {campaign}
+                      {t("summerBeautyCampaign")} {campaign}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Beauty & Skincare • 15 applications • $500-1000 budget
+                      {t("beautySkincare")} • 15 {t("applications")} • $500-1000 {t("budget")}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-3">
                   <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                    Active
+                    {t("active")}
                   </Badge>
                   <ContextualActions actions={campaignActions} variant="dropdown" size="sm" />
                 </div>
@@ -179,11 +187,11 @@ export default function BrandDashboard() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Recent Applications</CardTitle>
-              <CardDescription>Review new influencer applications</CardDescription>
+              <CardTitle>{t("recentApplications")}</CardTitle>
+              <CardDescription>{t("reviewNewApplications")}</CardDescription>
             </div>
             <Link href="/brand/dashboard/applications">
-              <Button variant="outline">View All</Button>
+              <Button variant="outline">{t("viewAll")}</Button>
             </Link>
           </div>
         </CardHeader>
@@ -199,19 +207,19 @@ export default function BrandDashboard() {
                     <Users className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900 dark:text-gray-100">Sarah Kim</h4>
+                    <h4 className="font-medium text-gray-900 dark:text-gray-100">{t("sarahKim")}</h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Applied to Summer Beauty Campaign • 50K followers
+                      {t("appliedTo")} {t("summerBeautyCampaign")} • 50K {t("followers")}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-2">
                   <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200">
-                    Pending
+                    {t("pending")}
                   </Badge>
                   <Button variant="outline" size="sm">
-                    Review
+                    {t("review")}
                   </Button>
                 </div>
               </div>

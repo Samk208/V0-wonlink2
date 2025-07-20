@@ -33,7 +33,7 @@ export function useApp() {
 }
 
 export function Providers({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("ko")
+  const [language, setLanguage] = useState<Language>("en")
   const [user, setUser] = useState<User | null>(null)
 
   // Load user from localStorage on mount
@@ -48,7 +48,7 @@ export function Providers({ children }: { children: ReactNode }) {
     }
 
     const savedLanguage = localStorage.getItem("wonlink-language") as Language
-    if (savedLanguage && ["ko", "en"].includes(savedLanguage)) {
+    if (savedLanguage && ["ko", "en", "zh"].includes(savedLanguage)) {
       setLanguage(savedLanguage)
     }
   }, [])

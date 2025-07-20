@@ -7,6 +7,7 @@ import { ArrowRight, Users, TrendingUp, Shield } from "lucide-react"
 import Link from "next/link"
 import { useApp } from "@/app/providers"
 import { useTranslation } from "@/lib/translations"
+import { LanguageSelector } from "@/components/language-selector"
 
 export default function LandingPage() {
   const { language } = useApp()
@@ -24,6 +25,7 @@ export default function LandingPage() {
             <span className="text-xl font-bold text-gray-900">Wonlink</span>
           </div>
           <div className="flex items-center space-x-4">
+            <LanguageSelector />
             <Link href="/auth">
               <Button variant="outline">{t("login")}</Button>
             </Link>

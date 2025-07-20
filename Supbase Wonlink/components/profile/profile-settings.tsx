@@ -28,7 +28,7 @@ import {
 
 export function ProfileSettings() {
   const { language } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
 
   const [accountSettings, setAccountSettings] = useState({
     email: "user@example.com",
@@ -92,25 +92,25 @@ export function ProfileSettings() {
   ])
 
   return (
-    <EnhancedDashboardLayout title="Settings">
+    <EnhancedDashboardLayout title={t("settings")}>
       <div className="space-y-6">
         <Card className="korean-card">
           <CardHeader>
             <CardTitle className="flex items-center">
               <Settings className="w-5 h-5 mr-2" />
-              Account Settings
+              {t("accountSettings")}
             </CardTitle>
-            <CardDescription>Manage your account preferences and security</CardDescription>
+            <CardDescription>{t("manageAccountPreferences")}</CardDescription>
           </CardHeader>
         </Card>
 
         <Tabs defaultValue="account" className="space-y-6">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="account">Account</TabsTrigger>
-            <TabsTrigger value="privacy">Privacy</TabsTrigger>
-            <TabsTrigger value="notifications">Notifications</TabsTrigger>
-            <TabsTrigger value="payment">Payment</TabsTrigger>
-            <TabsTrigger value="integrations">Integrations</TabsTrigger>
+            <TabsTrigger value="account">{t("account")}</TabsTrigger>
+            <TabsTrigger value="privacy">{t("privacy")}</TabsTrigger>
+            <TabsTrigger value="notifications">{t("notifications")}</TabsTrigger>
+            <TabsTrigger value="payment">{t("payment")}</TabsTrigger>
+            <TabsTrigger value="integrations">{t("integrations")}</TabsTrigger>
           </TabsList>
 
           {/* Account Tab */}
@@ -120,12 +120,12 @@ export function ProfileSettings() {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <User className="w-5 h-5 mr-2" />
-                    Basic Information
+                    {t("basicInformation")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email">{t("emailAddress")}</Label>
                     <Input
                       id="email"
                       type="email"
@@ -134,7 +134,7 @@ export function ProfileSettings() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">{t("phoneNumber")}</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -142,7 +142,7 @@ export function ProfileSettings() {
                       onChange={(e) => setAccountSettings((prev) => ({ ...prev, phone: e.target.value }))}
                     />
                   </div>
-                  <Button className="korean-button korean-gradient text-white">Update Information</Button>
+                  <Button className="korean-button korean-gradient text-white">{t("updateInformation")}</Button>
                 </CardContent>
               </Card>
 
@@ -150,12 +150,12 @@ export function ProfileSettings() {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Lock className="w-5 h-5 mr-2" />
-                    Password & Security
+                    {t("passwordSecurity")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="currentPassword">Current Password</Label>
+                    <Label htmlFor="currentPassword">{t("currentPassword")}</Label>
                     <Input
                       id="currentPassword"
                       type="password"
@@ -164,7 +164,7 @@ export function ProfileSettings() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="newPassword">New Password</Label>
+                    <Label htmlFor="newPassword">{t("newPassword")}</Label>
                     <Input
                       id="newPassword"
                       type="password"
@@ -173,7 +173,7 @@ export function ProfileSettings() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                    <Label htmlFor="confirmPassword">{t("confirmNewPassword")}</Label>
                     <Input
                       id="confirmPassword"
                       type="password"
@@ -181,7 +181,7 @@ export function ProfileSettings() {
                       onChange={(e) => setAccountSettings((prev) => ({ ...prev, confirmPassword: e.target.value }))}
                     />
                   </div>
-                  <Button className="korean-button korean-gradient text-white">Change Password</Button>
+                  <Button className="korean-button korean-gradient text-white">{t("changePassword")}</Button>
                 </CardContent>
               </Card>
             </div>
@@ -190,13 +190,13 @@ export function ProfileSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Globe className="w-5 h-5 mr-2" />
-                  Language & Region
+                  {t("languageRegion")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="language">Language</Label>
+                    <Label htmlFor="language">{t("language")}</Label>
                     <Select
                       value={languageSettings.language}
                       onValueChange={(value) => setLanguageSettings((prev) => ({ ...prev, language: value }))}
@@ -213,7 +213,7 @@ export function ProfileSettings() {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="timezone">Timezone</Label>
+                    <Label htmlFor="timezone">{t("timezone")}</Label>
                     <Select
                       value={languageSettings.timezone}
                       onValueChange={(value) => setLanguageSettings((prev) => ({ ...prev, timezone: value }))}
@@ -230,7 +230,7 @@ export function ProfileSettings() {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="dateFormat">Date Format</Label>
+                    <Label htmlFor="dateFormat">{t("dateFormat")}</Label>
                     <Select
                       value={languageSettings.dateFormat}
                       onValueChange={(value) => setLanguageSettings((prev) => ({ ...prev, dateFormat: value }))}
@@ -246,7 +246,7 @@ export function ProfileSettings() {
                     </Select>
                   </div>
                   <div>
-                    <Label htmlFor="currency">Currency</Label>
+                    <Label htmlFor="currency">{t("currency")}</Label>
                     <Select
                       value={languageSettings.currency}
                       onValueChange={(value) => setLanguageSettings((prev) => ({ ...prev, currency: value }))}
@@ -273,15 +273,15 @@ export function ProfileSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Shield className="w-5 h-5 mr-2" />
-                  Privacy Controls
+                  {t("privacyControls")}
                 </CardTitle>
-                <CardDescription>Control who can see your information and how it's used</CardDescription>
+                <CardDescription>{t("controlWhoCanSee")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="profileVisibility">Profile Visibility</Label>
-                    <p className="text-sm text-gray-600">Who can see your profile</p>
+                    <Label htmlFor="profileVisibility">{t("profileVisibility")}</Label>
+                    <p className="text-sm text-gray-600">{t("whoCanSeeProfile")}</p>
                   </div>
                   <Select
                     value={privacySettings.profileVisibility}
@@ -291,17 +291,17 @@ export function ProfileSettings() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="public">Public</SelectItem>
-                      <SelectItem value="verified">Verified Only</SelectItem>
-                      <SelectItem value="private">Private</SelectItem>
+                      <SelectItem value="public">{t("public")}</SelectItem>
+                      <SelectItem value="verified">{t("verifiedOnly")}</SelectItem>
+                      <SelectItem value="private">{t("private")}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="showEmail">Show Email Address</Label>
-                    <p className="text-sm text-gray-600">Display email on your public profile</p>
+                    <Label htmlFor="showEmail">{t("showEmailAddress")}</Label>
+                    <p className="text-sm text-gray-600">{t("displayEmailOnProfile")}</p>
                   </div>
                   <Switch
                     id="showEmail"
@@ -312,8 +312,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="showPhone">Show Phone Number</Label>
-                    <p className="text-sm text-gray-600">Display phone number on your profile</p>
+                    <Label htmlFor="showPhone">{t("showPhoneNumber")}</Label>
+                    <p className="text-sm text-gray-600">{t("displayPhoneOnProfile")}</p>
                   </div>
                   <Switch
                     id="showPhone"
@@ -324,8 +324,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="allowMessages">Allow Direct Messages</Label>
-                    <p className="text-sm text-gray-600">Let others send you messages</p>
+                    <Label htmlFor="allowMessages">{t("allowDirectMessages")}</Label>
+                    <p className="text-sm text-gray-600">{t("letOthersSendMessages")}</p>
                   </div>
                   <Switch
                     id="allowMessages"
@@ -336,8 +336,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="showOnlineStatus">Show Online Status</Label>
-                    <p className="text-sm text-gray-600">Let others see when you're online</p>
+                    <Label htmlFor="showOnlineStatus">{t("showOnlineStatus")}</Label>
+                    <p className="text-sm text-gray-600">{t("letOthersSeeOnline")}</p>
                   </div>
                   <Switch
                     id="showOnlineStatus"
@@ -350,8 +350,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="dataSharing">Data Sharing</Label>
-                    <p className="text-sm text-gray-600">Share analytics with platform partners</p>
+                    <Label htmlFor="dataSharing">{t("dataSharing")}</Label>
+                    <p className="text-sm text-gray-600">{t("shareAnalyticsWithPartners")}</p>
                   </div>
                   <Switch
                     id="dataSharing"
@@ -364,29 +364,29 @@ export function ProfileSettings() {
 
             <Card className="korean-card">
               <CardHeader>
-                <CardTitle className="text-red-600">Data Management</CardTitle>
-                <CardDescription>Manage your personal data</CardDescription>
+                <CardTitle className="text-red-600">{t("dataManagement")}</CardTitle>
+                <CardDescription>{t("managePersonalData")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between p-4 border rounded-lg">
                   <div>
-                    <h4 className="font-medium">Download Your Data</h4>
-                    <p className="text-sm text-gray-600">Get a copy of all your data</p>
+                    <h4 className="font-medium">{t("downloadYourData")}</h4>
+                    <p className="text-sm text-gray-600">{t("getCopyOfData")}</p>
                   </div>
                   <Button variant="outline" className="korean-button bg-transparent">
                     <Download className="w-4 h-4 mr-2" />
-                    Download
+                    {t("download")}
                   </Button>
                 </div>
 
                 <div className="flex items-center justify-between p-4 border border-red-200 rounded-lg">
                   <div>
-                    <h4 className="font-medium text-red-600">Delete Account</h4>
-                    <p className="text-sm text-gray-600">Permanently delete your account and data</p>
+                    <h4 className="font-medium text-red-600">{t("deleteAccount")}</h4>
+                    <p className="text-sm text-gray-600">{t("permanentlyDeleteAccount")}</p>
                   </div>
                   <Button variant="destructive">
                     <Trash2 className="w-4 h-4 mr-2" />
-                    Delete
+                    {t("delete")}
                   </Button>
                 </div>
               </CardContent>
@@ -399,15 +399,15 @@ export function ProfileSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Bell className="w-5 h-5 mr-2" />
-                  Notification Preferences
+                  {t("notificationPreferences")}
                 </CardTitle>
-                <CardDescription>Choose how you want to be notified</CardDescription>
+                <CardDescription>{t("chooseHowNotified")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="emailNotifications">Email Notifications</Label>
-                    <p className="text-sm text-gray-600">Receive notifications via email</p>
+                    <Label htmlFor="emailNotifications">{t("emailNotifications")}</Label>
+                    <p className="text-sm text-gray-600">{t("receiveNotificationsEmail")}</p>
                   </div>
                   <Switch
                     id="emailNotifications"
@@ -420,8 +420,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="pushNotifications">Push Notifications</Label>
-                    <p className="text-sm text-gray-600">Receive push notifications on your device</p>
+                    <Label htmlFor="pushNotifications">{t("pushNotifications")}</Label>
+                    <p className="text-sm text-gray-600">{t("receivePushNotifications")}</p>
                   </div>
                   <Switch
                     id="pushNotifications"
@@ -434,8 +434,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="campaignUpdates">Campaign Updates</Label>
-                    <p className="text-sm text-gray-600">Get notified about campaign status changes</p>
+                    <Label htmlFor="campaignUpdates">{t("campaignUpdates")}</Label>
+                    <p className="text-sm text-gray-600">{t("getNotifiedCampaignChanges")}</p>
                   </div>
                   <Switch
                     id="campaignUpdates"
@@ -448,8 +448,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="messageNotifications">Message Notifications</Label>
-                    <p className="text-sm text-gray-600">Get notified about new messages</p>
+                    <Label htmlFor="messageNotifications">{t("messageNotifications")}</Label>
+                    <p className="text-sm text-gray-600">{t("getNotifiedNewMessages")}</p>
                   </div>
                   <Switch
                     id="messageNotifications"
@@ -462,8 +462,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="marketingEmails">Marketing Emails</Label>
-                    <p className="text-sm text-gray-600">Receive promotional emails and updates</p>
+                    <Label htmlFor="marketingEmails">{t("marketingEmails")}</Label>
+                    <p className="text-sm text-gray-600">{t("receivePromotionalEmails")}</p>
                   </div>
                   <Switch
                     id="marketingEmails"
@@ -476,8 +476,8 @@ export function ProfileSettings() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="weeklyReports">Weekly Reports</Label>
-                    <p className="text-sm text-gray-600">Receive weekly performance summaries</p>
+                    <Label htmlFor="weeklyReports">{t("weeklyReports")}</Label>
+                    <p className="text-sm text-gray-600">{t("receiveWeeklyPerformance")}</p>
                   </div>
                   <Switch
                     id="weeklyReports"
@@ -497,14 +497,14 @@ export function ProfileSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <CreditCard className="w-5 h-5 mr-2" />
-                  Payment Information
+                  {t("paymentInformation")}
                 </CardTitle>
-                <CardDescription>Manage your payment and tax information</CardDescription>
+                <CardDescription>{t("managePaymentTaxInfo")}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="bankName">Bank Name</Label>
+                    <Label htmlFor="bankName">{t("bankName")}</Label>
                     <Input
                       id="bankName"
                       value={paymentInfo.bankName}
@@ -512,7 +512,7 @@ export function ProfileSettings() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="accountNumber">Account Number</Label>
+                    <Label htmlFor="accountNumber">{t("accountNumber")}</Label>
                     <Input
                       id="accountNumber"
                       value={paymentInfo.accountNumber}
@@ -520,7 +520,7 @@ export function ProfileSettings() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="accountHolder">Account Holder Name</Label>
+                    <Label htmlFor="accountHolder">{t("accountHolderName")}</Label>
                     <Input
                       id="accountHolder"
                       value={paymentInfo.accountHolder}
@@ -528,7 +528,7 @@ export function ProfileSettings() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="taxId">Tax ID</Label>
+                    <Label htmlFor="taxId">{t("taxId")}</Label>
                     <Input
                       id="taxId"
                       value={paymentInfo.taxId}
@@ -537,22 +537,22 @@ export function ProfileSettings() {
                   </div>
                 </div>
 
-                <Button className="korean-button korean-gradient text-white">Update Payment Info</Button>
+                <Button className="korean-button korean-gradient text-white">{t("updatePaymentInfo")}</Button>
               </CardContent>
             </Card>
 
             <Card className="korean-card">
               <CardHeader>
-                <CardTitle>Tax Documents</CardTitle>
-                <CardDescription>Upload and manage your tax documents</CardDescription>
+                <CardTitle>{t("taxDocuments")}</CardTitle>
+                <CardDescription>{t("uploadManageTaxDocs")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-gray-600 mb-2">Upload tax documents</p>
-                  <p className="text-sm text-gray-500">PDF, JPG, PNG up to 10MB</p>
+                  <p className="text-gray-600 mb-2">{t("uploadTaxDocuments")}</p>
+                  <p className="text-sm text-gray-500">{t("pdfJpgPngUpTo10MB")}</p>
                   <Button variant="outline" className="mt-4 korean-button bg-transparent">
-                    Choose Files
+                    {t("chooseFiles")}
                   </Button>
                 </div>
               </CardContent>
@@ -565,9 +565,9 @@ export function ProfileSettings() {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <Smartphone className="w-5 h-5 mr-2" />
-                  Connected Apps & Services
+                  {t("connectedAppsServices")}
                 </CardTitle>
-                <CardDescription>Manage your connected social media accounts and integrations</CardDescription>
+                <CardDescription>{t("manageConnectedAccounts")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -581,9 +581,9 @@ export function ProfileSettings() {
                           <h4 className="font-semibold">{app.name}</h4>
                           <div className="flex items-center space-x-2">
                             <Badge variant={app.connected ? "default" : "secondary"}>
-                              {app.connected ? "Connected" : "Not Connected"}
+                              {app.connected ? t("connected") : t("notConnected")}
                             </Badge>
-                            {app.lastSync && <span className="text-xs text-gray-500">Last sync: {app.lastSync}</span>}
+                            {app.lastSync && <span className="text-xs text-gray-500">{t("lastSync")}: {app.lastSync}</span>}
                           </div>
                           {app.permissions.length > 0 && (
                             <div className="flex space-x-1 mt-1">
@@ -600,15 +600,15 @@ export function ProfileSettings() {
                         {app.connected ? (
                           <>
                             <Button variant="outline" size="sm" className="korean-button bg-transparent">
-                              Settings
+                              {t("settings")}
                             </Button>
                             <Button variant="outline" size="sm" className="korean-button text-red-600 bg-transparent">
-                              Disconnect
+                              {t("disconnect")}
                             </Button>
                           </>
                         ) : (
                           <Button size="sm" className="korean-button korean-gradient text-white">
-                            Connect
+                            {t("connect")}
                           </Button>
                         )}
                       </div>
@@ -620,25 +620,25 @@ export function ProfileSettings() {
 
             <Card className="korean-card">
               <CardHeader>
-                <CardTitle>API Access</CardTitle>
-                <CardDescription>Manage API keys and third-party integrations</CardDescription>
+                <CardTitle>{t("apiAccess")}</CardTitle>
+                <CardDescription>{t("manageApiKeys")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
-                      <h4 className="font-medium">API Key</h4>
-                      <p className="text-sm text-gray-600">For third-party integrations</p>
+                      <h4 className="font-medium">{t("apiKey")}</h4>
+                      <p className="text-sm text-gray-600">{t("forThirdPartyIntegrations")}</p>
                       <code className="text-xs bg-gray-100 px-2 py-1 rounded mt-1 inline-block">
                         wl_sk_****************************
                       </code>
                     </div>
                     <div className="flex space-x-2">
                       <Button variant="outline" size="sm" className="korean-button bg-transparent">
-                        Regenerate
+                        {t("regenerate")}
                       </Button>
                       <Button variant="outline" size="sm" className="korean-button bg-transparent">
-                        Copy
+                        {t("copy")}
                       </Button>
                     </div>
                   </div>

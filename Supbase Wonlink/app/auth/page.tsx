@@ -12,10 +12,15 @@ import { Separator } from "@/components/ui/separator"
 import { ArrowLeft, Mail, Lock, User } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useApp } from "@/app/providers"
+import { useTranslation } from "@/lib/translations"
+import { LanguageSelector } from "@/components/language-selector"
 
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const { language } = useApp()
+  const { t } = useTranslation(language)
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -41,44 +46,47 @@ export default function AuthPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="mb-8">
-          <Link href="/landing" className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 mb-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            돌아가기
-          </Link>
+          <div className="flex justify-between items-center mb-4">
+            <Link href="/landing" className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {t("goBack")}
+            </Link>
+            <LanguageSelector />
+          </div>
           <div className="flex items-center justify-center mb-6">
             <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">W</span>
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-center text-gray-900 mb-2">Wonlink에 오신 것을 환영합니다</h1>
-          <p className="text-center text-gray-600">계정에 로그인하거나 새 계정을 만드세요</p>
+          <h1 className="text-2xl font-bold text-center text-gray-900 mb-2">{t("welcomeToWonlink")}</h1>
+          <p className="text-center text-gray-600">{t("loginOrCreateAccount")}</p>
         </div>
 
         <Card>
           <CardHeader className="space-y-1">
             <Tabs defaultValue="login" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">로그인</TabsTrigger>
-                <TabsTrigger value="register">회원가입</TabsTrigger>
+                <TabsTrigger value="login">{t("loginTab")}</TabsTrigger>
+                <TabsTrigger value="register">{t("registerTab")}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="login" className="space-y-4">
                 <div className="space-y-2">
-                  <CardTitle className="text-xl">로그인</CardTitle>
-                  <CardDescription>이메일과 비밀번호를 입력하여 로그인하세요</CardDescription>
+                  <CardTitle className="text-xl">{t("loginTitle")}</CardTitle>
+                  <CardDescription>{t("loginDescription")}</CardDescription>
                 </div>
 
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">이메일</Label>
+                    <Label htmlFor="email">{t("email")}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                      <Input id="email" type="email" placeholder="name@example.com" className="pl-10" required />
+                      <Input id="email" type="email" placeholder={t("emailPlaceholder")} className="pl-10" required />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="password">비밀번호</Label>
+                    <Label htmlFor="password">{t("password")}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input id="password" type="password" className="pl-10" required />
@@ -86,40 +94,40 @@ export default function AuthPage() {
                   </div>
 
                   <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? "로그인 중..." : "로그인"}
+                    {isLoading ? t("loggingIn") : t("login")}
                   </Button>
                 </form>
 
                 <div className="text-center">
                   <Button variant="link" className="text-sm">
-                    비밀번호를 잊으셨나요?
+                    {t("forgotPasswordQuestion")}
                   </Button>
                 </div>
               </TabsContent>
 
               <TabsContent value="register" className="space-y-4">
                 <div className="space-y-2">
-                  <CardTitle className="text-xl">회원가입</CardTitle>
-                  <CardDescription>새 계정을 만들어 시작하세요</CardDescription>
+                  <CardTitle className="text-xl">{t("registerTitle")}</CardTitle>
+                  <CardDescription>{t("registerDescription")}</CardDescription>
                 </div>
 
                 <form onSubmit={handleRegister} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name">이름</Label>
+                    <Label htmlFor="name">{t("name")}</Label>
                     <div className="relative">
                       <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                      <Input id="name" type="text" placeholder="홍길동" className="pl-10" required />
+                      <Input id="name" type="text" placeholder={t("namePlaceholder")} className="pl-10" required />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="register-email">이메일</Label>
+                    <Label htmlFor="register-email">{t("email")}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
                         id="register-email"
                         type="email"
-                        placeholder="name@example.com"
+                        placeholder={t("emailPlaceholder")}
                         className="pl-10"
                         required
                       />
@@ -127,7 +135,7 @@ export default function AuthPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="register-password">비밀번호</Label>
+                    <Label htmlFor="register-password">{t("password")}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input id="register-password" type="password" className="pl-10" required />
@@ -135,7 +143,7 @@ export default function AuthPage() {
                   </div>
 
                   <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? "계정 생성 중..." : "계정 만들기"}
+                    {isLoading ? t("creatingAccount") : t("createAccount")}
                   </Button>
                 </form>
               </TabsContent>
@@ -145,7 +153,7 @@ export default function AuthPage() {
 
         <div className="mt-6">
           <Separator className="my-4" />
-          <div className="text-center text-sm text-gray-600">소셜 계정으로 계속하기</div>
+          <div className="text-center text-sm text-gray-600">{t("continueWithSocial")}</div>
           <div className="mt-4 grid grid-cols-2 gap-3">
             <Button variant="outline" className="w-full bg-transparent">
               Google
@@ -157,15 +165,15 @@ export default function AuthPage() {
         </div>
 
         <div className="mt-8 text-center text-xs text-gray-500">
-          계속 진행하면{" "}
+          {t("termsAndPrivacy")}{" "}
           <Button variant="link" className="p-0 h-auto text-xs">
-            서비스 약관
+            {t("termsOfService")}
           </Button>{" "}
-          및{" "}
+          {t("and")}{" "}
           <Button variant="link" className="p-0 h-auto text-xs">
-            개인정보처리방침
+            {t("privacyPolicy")}
           </Button>
-          에 동의하는 것으로 간주됩니다.
+          {t("agreementSuffix")}
         </div>
       </div>
     </div>

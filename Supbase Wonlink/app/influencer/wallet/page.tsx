@@ -11,27 +11,27 @@ import { Wallet, TrendingUp, ArrowUpRight, ArrowDownLeft, Download, Calendar, Cr
 
 export default function InfluencerWalletPage() {
   const { language, user } = useApp()
-  const t = useTranslation(language)
+  const { t } = useTranslation(language)
 
   const walletStats = [
     {
-      title: "Available Balance",
+      title: t("availableForWithdrawal"),
       value: "₩2,450,000",
       change: "+₩500,000",
       icon: Wallet,
       color: "text-green-600",
     },
     {
-      title: "Pending Earnings",
+      title: t("pendingPaymentsDesc"),
       value: "₩800,000",
       change: "2 campaigns",
       icon: Calendar,
       color: "text-orange-600",
     },
     {
-      title: "Total Earned",
+      title: t("totalEarnings"),
       value: "₩8,750,000",
-      change: "This year",
+      change: t("totalEarningsDesc"),
       icon: TrendingUp,
       color: "text-blue-600",
     },

@@ -26,28 +26,28 @@ export default function InfluencerDashboard() {
 
   const stats = [
     {
-      title: "Total Earnings",
+      title: t.t("totalEarnings" as any),
       value: "₩2,450,000",
       change: "+12.5%",
       icon: DollarSign,
       color: "text-green-600",
     },
     {
-      title: "Active Campaigns",
+      title: t.t("activeCampaigns" as any),
       value: "3",
       change: "+1",
       icon: Calendar,
       color: "text-blue-600",
     },
     {
-      title: "Total Followers",
+      title: t.t("totalFollowers" as any),
       value: "125K",
       change: "+2.3K",
       icon: Users,
       color: "text-purple-600",
     },
     {
-      title: "Engagement Rate",
+      title: t.t("engagementRate" as any),
       value: "4.8%",
       change: "+0.3%",
       icon: TrendingUp,
@@ -58,27 +58,27 @@ export default function InfluencerDashboard() {
   const recentCampaigns = [
     {
       id: 1,
-      title: "Summer Beauty Collection",
-      brand: "Glow Cosmetics",
-      status: "Active",
+      titleKey: "summerBeautyCollection",
+      brandKey: "glowCosmetics",
+      statusKey: "active",
       payment: "₩500,000",
       deadline: "2024-02-15",
       progress: 75,
     },
     {
       id: 2,
-      title: "Fashion Week Showcase",
-      brand: "Seoul Fashion",
-      status: "Completed",
+      titleKey: "fashionWeekShowcase",
+      brandKey: "seoulFashion",
+      statusKey: "completed",
       payment: "₩750,000",
       deadline: "2024-01-30",
       progress: 100,
     },
     {
       id: 3,
-      title: "Tech Product Review",
-      brand: "TechKorea",
-      status: "In Review",
+      titleKey: "techProductReview",
+      brandKey: "techKorea",
+      statusKey: "inReview",
       payment: "₩300,000",
       deadline: "2024-02-20",
       progress: 50,
@@ -93,12 +93,12 @@ export default function InfluencerDashboard() {
   ]
 
   const sidebarItems = [
-    { label: "Dashboard", href: "/influencer/dashboard" },
-    { label: "Browse Campaigns", href: "/influencer/campaigns" },
-    { label: "My Applications", href: "/influencer/applications" },
-    { label: "Portfolio", href: "/influencer/portfolio" },
-    { label: "Earnings", href: "/influencer/wallet" },
-    { label: "Profile", href: "/profile/influencer" },
+    { label: t.t("dashboard"), href: "/influencer/dashboard" },
+    { label: t.t("browseCampaigns" as any), href: "/influencer/campaigns" },
+    { label: t.t("myApplications"), href: "/influencer/applications" },
+    { label: t.t("portfolio"), href: "/influencer/portfolio" },
+    { label: t.t("earnings"), href: "/influencer/wallet" },
+    { label: t.t("profile"), href: "/profile/influencer" },
   ]
 
   return (
@@ -106,8 +106,8 @@ export default function InfluencerDashboard() {
       <div className="space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.name || "Influencer"}!</h1>
-          <p className="text-gray-600 mt-2">Here's what's happening with your campaigns today.</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t.t("welcomeBack" as any)}, {user?.name || "Influencer"}!</h1>
+          <p className="text-gray-600 mt-2">{t.t("hereIsWhatsHappening" as any)}</p>
         </div>
 
         {/* Stats Grid */}
@@ -121,7 +121,7 @@ export default function InfluencerDashboard() {
                     <div>
                       <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                       <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                      <p className={`text-sm ${stat.color}`}>{stat.change} from last month</p>
+                      <p className={`text-sm ${stat.color}`}>{stat.change} {t.t("fromLastMonth" as any)}</p>
                     </div>
                     <div className={`p-3 rounded-full bg-gray-100 ${stat.color}`}>
                       <Icon className="w-6 h-6" />
@@ -139,12 +139,12 @@ export default function InfluencerDashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
-                  <CardTitle>Recent Campaigns</CardTitle>
-                  <CardDescription>Your latest campaign activities</CardDescription>
+                  <CardTitle>{t.t("recentCampaigns" as any)}</CardTitle>
+                  <CardDescription>{t.t("latestCampaignActivities" as any)}</CardDescription>
                 </div>
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/influencer/campaigns">
-                    View All
+                    {t.t("viewAll" as any)}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
@@ -155,27 +155,27 @@ export default function InfluencerDashboard() {
                     <div key={campaign.id} className="flex items-center justify-between p-4 border rounded-lg">
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-semibold">{campaign.title}</h3>
+                          <h3 className="font-semibold">{t.t(campaign.titleKey as any)}</h3>
                           <Badge
                             variant={
-                              campaign.status === "Active"
+                              campaign.statusKey === "active"
                                 ? "default"
-                                : campaign.status === "Completed"
+                                : campaign.statusKey === "completed"
                                   ? "secondary"
                                   : "outline"
                             }
                           >
-                            {campaign.status}
+                            {t.t(campaign.statusKey as any)}
                           </Badge>
                         </div>
-                        <p className="text-sm text-gray-600 mb-2">{campaign.brand}</p>
+                        <p className="text-sm text-gray-600 mb-2">{t.t(campaign.brandKey as any)}</p>
                         <div className="flex items-center justify-between text-sm">
                           <span className="font-medium text-green-600">{campaign.payment}</span>
-                          <span className="text-gray-500">Due: {campaign.deadline}</span>
+                          <span className="text-gray-500">{t.t("due" as any)}: {campaign.deadline}</span>
                         </div>
                         <div className="mt-2">
                           <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
-                            <span>Progress</span>
+                            <span>{t.t("progress" as any)}</span>
                             <span>{campaign.progress}%</span>
                           </div>
                           <Progress value={campaign.progress} className="h-2" />
@@ -192,8 +192,8 @@ export default function InfluencerDashboard() {
           <div>
             <Card>
               <CardHeader>
-                <CardTitle>Social Media Stats</CardTitle>
-                <CardDescription>Your platform performance</CardDescription>
+                <CardTitle>{t.t("socialMediaStats" as any)}</CardTitle>
+                <CardDescription>{t.t("platformPerformance" as any)}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -205,12 +205,12 @@ export default function InfluencerDashboard() {
                           <Icon className={`w-5 h-5 ${social.color}`} />
                           <div>
                             <p className="font-medium">{social.platform}</p>
-                            <p className="text-sm text-gray-600">{social.followers} followers</p>
+                            <p className="text-sm text-gray-600">{social.followers} {t.t("followers" as any)}</p>
                           </div>
                         </div>
                         <div className="text-right">
                           <p className="font-medium">{social.engagement}</p>
-                          <p className="text-xs text-gray-500">engagement</p>
+                          <p className="text-xs text-gray-500">{t.t("engagement" as any)}</p>
                         </div>
                       </div>
                     )
@@ -218,7 +218,7 @@ export default function InfluencerDashboard() {
                 </div>
                 <Button className="w-full mt-4 bg-transparent" variant="outline" asChild>
                   <Link href="/influencer/portfolio">
-                    Update Portfolio
+                    {t.t("updatePortfolio" as any)}
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
@@ -228,17 +228,17 @@ export default function InfluencerDashboard() {
             {/* Quick Actions */}
             <Card className="mt-6">
               <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
+                <CardTitle>{t.t("quickActions" as any)}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full" asChild>
-                  <Link href="/influencer/campaigns">Browse New Campaigns</Link>
+                  <Link href="/influencer/campaigns">{t.t("browseNewCampaigns" as any)}</Link>
                 </Button>
                 <Button className="w-full bg-transparent" variant="outline" asChild>
-                  <Link href="/influencer/applications">View Applications</Link>
+                  <Link href="/influencer/applications">{t.t("viewApplications" as any)}</Link>
                 </Button>
                 <Button className="w-full bg-transparent" variant="outline" asChild>
-                  <Link href="/influencer/wallet">Check Earnings</Link>
+                  <Link href="/influencer/wallet">{t.t("checkEarnings" as any)}</Link>
                 </Button>
               </CardContent>
             </Card>
