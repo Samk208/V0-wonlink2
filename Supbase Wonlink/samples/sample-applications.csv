@@ -1,0 +1,11 @@
+campaign_id,campaign_name,brand,influencer_id,influencer_name,platform,engagement_rate,reach,followers,proposed_rate,status
+CAMP001,Summer Fashion,Adidas,INF001,@fashionista_emma,Instagram,4.2,50000,120000,500,approved
+CAMP002,Tech Launch,Samsung,INF002,@tech_guru_mike,YouTube,3.8,75000,200000,800,pending
+CAMP003,Fitness App,Nike,INF003,@fit_life_sarah,TikTok,5.1,30000,80000,400,approved
+CAMP004,Beauty Products,L'Oreal,INF004,@beauty_expert_jane,Instagram,4.5,40000,95000,600,rejected
+CAMP005,Gaming Console,Sony,INF005,@gamer_pro_tom,YouTube,4.8,100000,250000,1200,approved
+CAMP006,Food Delivery,Uber Eats,INF006,@foodie_lisa,Instagram,3.9,35000,75000,350,pending
+CAMP007,Travel App,Booking.com,INF007,@travel_vlog_dave,YouTube,4.1,60000,150000,700,approved
+CAMP008,Home Decor,IKEA,INF008,@home_design_amy,Instagram,4.3,25000,60000,300,approved
+CAMP009,Music Streaming,Spotify,INF009,@music_lover_carl,TikTok,4.7,45000,110000,550,pending
+CAMP010,Car Brand,Tesla,INF010,@auto_reviewer_sam,YouTube,4.0,80000,180000,900,approved

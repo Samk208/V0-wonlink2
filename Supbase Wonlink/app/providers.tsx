@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { ThemeProvider } from "next-themes"
 import type { Language } from "@/lib/translations"
+import { getClientLanguage, setLanguageCookie } from "@/lib/language-utils"
 
 interface User {
   id: string
@@ -46,18 +47,13 @@ export function Providers({ children, initialLanguage = "en" }: ProvidersProps) 
   // Initialize language from cookies after hydration (SSR-safe)
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Simplified client-side language detection
-      const savedLanguage = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('language='))
-        ?.split('=')[1] as Language || 'en'
-      
-      if (savedLanguage !== language) {
-        setLanguageState(savedLanguage)
+      const clientLanguage = getClientLanguage()
+      if (clientLanguage !== language) {
+        setLanguageState(clientLanguage)
       }
+      setIsHydrated(true)
     }
-    setIsHydrated(true)
-  }, [])
+  }, [language])
 
   // Load user from localStorage on mount (client-only)
   useEffect(() => {
@@ -89,7 +85,7 @@ export function Providers({ children, initialLanguage = "en" }: ProvidersProps) 
       setLanguageState(newLanguage)
       // Save to cookie for SSR persistence
       if (typeof window !== 'undefined') {
-        document.cookie = `language=${newLanguage}; path=/; max-age=31536000`
+        setLanguageCookie(newLanguage)
       }
     }
   }
@@ -105,7 +101,12 @@ export function Providers({ children, initialLanguage = "en" }: ProvidersProps) 
 
   return (
     <AppContext.Provider value={value}>
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
         {children}
       </ThemeProvider>
     </AppContext.Provider>

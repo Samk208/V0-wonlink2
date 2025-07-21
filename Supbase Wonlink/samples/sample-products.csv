@@ -1,0 +1,11 @@
+name,description,price,category,brand,sku
+"iPhone 15 Pro","Latest iPhone with advanced camera",999.99,Electronics,Apple,IPH15PRO
+"Samsung Galaxy S24","Premium Android smartphone",899.99,Electronics,Samsung,SAMS24
+"MacBook Air M2","Lightweight laptop for productivity",1199.99,Computers,Apple,MACBOOKAIR
+"Nike Air Max 270","Comfortable running shoes",129.99,Footwear,Nike,NIKE270
+"Adidas Ultraboost","Performance running shoes",179.99,Footwear,Adidas,ADIDASUB
+"Canon EOS R5","Professional mirrorless camera",3899.99,Electronics,Canon,CANONR5
+"Sony WH-1000XM4","Noise-cancelling headphones",349.99,Electronics,Sony,SONYWH4
+"iPad Pro 12.9","Large tablet for creative work",1099.99,Electronics,Apple,IPADPRO
+"Microsoft Surface Pro","2-in-1 laptop and tablet",1299.99,Computers,Microsoft,SURFACEPRO
+"Logitech MX Master 3","Premium wireless mouse",99.99,Electronics,Logitech,LOGIMX3

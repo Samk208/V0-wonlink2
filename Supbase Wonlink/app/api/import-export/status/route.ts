@@ -1,38 +1,54 @@
 import { createClient } from '@/utils/supabase/server'
 import { NextRequest, NextResponse } from 'next/server'
+import { withSecurity } from '@/lib/security/middleware'
+import { logger } from '@/lib/security/logger'
+import { statusRequestSchema, refreshAnalyticsSchema } from '@/lib/security/validation-schemas'
 
-export async function GET(request: NextRequest) {
-  try {
-    const supabase = createClient()
-    
-    // Check authentication
-    const { data: { user }, error: authError } = await supabase.auth.getUser()
-    if (authError || !user) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      )
+async function getStatusHandler(request: NextRequest) {
+  const supabase = createClient()
+  
+  // Check authentication
+  const { data: { user }, error: authError } = await supabase.auth.getUser()
+  if (authError || !user) {
+    throw new Error('Unauthorized')
+  }
+
+  const { searchParams } = new URL(request.url)
+  const uploadId = searchParams.get('uploadId')
+  const exportId = searchParams.get('exportId')
+  
+  // Validate query parameters
+  const validationResult = statusRequestSchema.safeParse({ uploadId, exportId })
+  if (!validationResult.success) {
+    logger.warn('Status request validation failed', {
+      userId: user.id,
+      errors: validationResult.error.errors,
+      uploadId,
+      exportId
+    })
+    throw new Error('Invalid request parameters')
+  }
+  
+  logger.info('Status request received', {
+    userId: user.id,
+    uploadId,
+    exportId,
+    requestType: uploadId ? 'upload' : exportId ? 'export' : 'overview'
+  })
+
+  if (uploadId) {
+    // Get upload status
+    const { data: upload, error: uploadError } = await supabase
+      .from('file_uploads')
+      .select('*')
+      .eq('id', uploadId)
+      .eq('user_id', user.id)
+      .single()
+
+    if (uploadError || !upload) {
+      logger.warn('Upload not found', { userId: user.id, uploadId })
+      throw new Error('Upload not found')
     }
-
-    const { searchParams } = new URL(request.url)
-    const uploadId = searchParams.get('uploadId')
-    const exportId = searchParams.get('exportId')
-
-    if (uploadId) {
-      // Get upload status
-      const { data: upload, error: uploadError } = await supabase
-        .from('file_uploads')
-        .select('*')
-        .eq('id', uploadId)
-        .eq('user_id', user.id)
-        .single()
-
-      if (uploadError || !upload) {
-        return NextResponse.json(
-          { error: 'Upload not found' },
-          { status: 404 }
-        )
-      }
 
       // Get associated errors if any
       let errors: any[] = []
@@ -166,19 +182,24 @@ export async function GET(request: NextRequest) {
         }
       })
     }
-
-  } catch (error) {
-    console.error('Status API error:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
   }
+
+  return NextResponse.json({
+    success: true,
+    status: 'Request completed successfully'
+  })
 }
 
-export async function POST(request: NextRequest) {
-  try {
-    const supabase = createClient()
+// Wrap GET handler with security middleware
+export const GET = withSecurity(getStatusHandler, {
+  rateLimit: { maxRequests: 200, windowMs: 60 * 60 * 1000 }, // 200 requests per hour
+  requireAuth: true,
+  validateInput: false, // Query params validated in handler
+  enableCSRF: true
+})
+
+async function postStatusHandler(request: NextRequest) {
+  const supabase = createClient()
     
     // Check authentication
     const { data: { user }, error: authError } = await supabase.auth.getUser()

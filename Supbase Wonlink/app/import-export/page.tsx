@@ -4,10 +4,38 @@ import React, { useState, useCallback } from 'react'
 import { Upload, Download, FileText, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 import { useClientTranslation } from '@/lib/translations'
 import FileUploadZone from '@/components/import-export/file-upload-zone'
+import { HydrationBoundary } from '@/components/hydration-boundary'
 
 export default function ImportExportPage() {
-  const { t } = useClientTranslation()
+  return (
+    <HydrationBoundary>
+      <ImportExportContent />
+    </HydrationBoundary>
+  )
+}
+
+function ImportExportContent() {
+  const { t, isHydrated } = useClientTranslation()
   const [activeTab, setActiveTab] = useState<'import' | 'export' | 'recent'>('import')
+
+  // Show loading state during hydration to prevent mismatch
+  if (!isHydrated) {
+    return (
+      <div className="max-w-6xl mx-auto p-6 space-y-8">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Product Import/Export
+          </h1>
+          <p className="text-gray-600">
+            Manage your product catalogs and campaign data efficiently
+          </p>
+        </div>
+        <div className="flex justify-center">
+          <Loader2 className="w-6 h-6 animate-spin" />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-8">

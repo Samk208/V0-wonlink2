@@ -545,10 +545,11 @@ export const translations = {
     recentStatusError: "error",
     recentViewDetails: "View Details",
     
-    // File Processing
+    // File Processing (following documentation pattern)
     fileValidationInvalidFormat: "Invalid file format. Please use CSV, Excel, or JSON.",
-    fileValidationTooLarge: "File is too large. Maximum size is 10MB.",
+    fileValidationTooLarge: "File is too large. Maximum size is {size}.",
     fileValidationEmpty: "File is empty. Please select a file with data.",
+    fileValidationDuplicate: "File already exists in queue.",
     fileValidationMissingColumns: "Missing required columns: {columns}",
     fileValidationInvalidData: "Invalid data in row {row}: {error}",
     fileProcessingStarted: "File processing started",
@@ -560,6 +561,150 @@ export const translations = {
     fileDownloadPreparing: "Preparing download...",
     fileDownloadReady: "Download ready",
     fileTemplateDownload: "Download Template",
+    
+    // Enhanced File Upload
+    fileUploadDragDrop: "Drag and drop files here, or click to browse",
+    fileUploadDropHere: "Drop files here",
+    fileUploadChooseFiles: "Choose Files",
+    fileUploadFormats: "Supports {formats}",
+    fileUploadMaxSize: "Max size: {size}",
+    fileUploadMaxFiles: "Max {count} files",
+    fileUploadQueue: "Upload Queue",
+    fileUploadQueueDescription: "Manage your file uploads and track progress",
+    fileUploadProcessing: "Processing",
+    fileUploadPending: "Pending",
+    fileUploadActive: "Active",
+    fileUploadCompleted: "Completed",
+    fileUploadError: "Error",
+    fileUploadComplete: "Complete",
+    fileUploadPause: "Pause",
+    fileUploadResume: "Resume",
+    fileUploadSuccessCount: "Success",
+    fileUploadErrors: "Errors",
+    fileUploadErrorDetails: "Error Details",
+    
+    // Column Mapping
+    columnMappingTitle: "Column Mapping",
+    columnMappingDescription: "Map your file columns to product fields",
+    columnMappingAutoDetect: "Auto Detect",
+    columnMappingMappings: "Column Mappings",
+    columnMappingDragDrop: "Drag and drop to reorder columns",
+    columnMappingRequired: "Required",
+    columnMappingSelectField: "Select field",
+    columnMappingSkip: "Skip this column",
+    columnMappingPreview: "Data Preview",
+    columnMappingPreviewDescription: "Preview how your data will be imported",
+    columnMappingValidationError: "Please map all required fields before proceeding",
+    columnMappingSaveTemplate: "Save Template",
+    columnMappingLoadTemplate: "Load Template",
+    columnMappingComplete: "Complete Mapping",
+    columnMappingAnalyzing: "Analyzing file structure...",
+    columnMappingHidePreview: "Hide Preview",
+    columnMappingShowPreview: "Show Preview",
+    
+    // Export Wizard
+    exportWizardTitle: "Export Wizard",
+    exportWizardStep: "Step",
+    exportWizardOf: "of",
+    exportWizardProgress: "Progress",
+    exportWizardPrevious: "Previous",
+    exportWizardNext: "Next",
+    exportWizardExport: "Export",
+    exportWizardExporting: "Exporting...",
+    exportWizardPreparing: "Preparing export...",
+    
+    exportWizardStepType: "Export Type",
+    exportWizardStepTypeDescription: "Choose what data to export",
+    exportWizardStepDateRange: "Date Range",
+    exportWizardStepDateRangeDescription: "Select the date range for your export",
+    exportWizardStepColumns: "Columns",
+    exportWizardStepColumnsDescription: "Choose which columns to include",
+    exportWizardStepFormat: "Format",
+    exportWizardStepFormatDescription: "Select your preferred export format",
+    exportWizardStepReview: "Review",
+    exportWizardStepReviewDescription: "Review your export settings",
+    
+    exportWizardProductsTitle: "Product Catalog",
+    exportWizardProductsDescription: "Export your product catalog with all details",
+    exportWizardCampaignsTitle: "Campaign Data",
+    exportWizardCampaignsDescription: "Export campaign performance and analytics",
+    exportWizardAnalyticsTitle: "Analytics Report",
+    exportWizardAnalyticsDescription: "Export detailed analytics and insights",
+    
+    exportWizardDateRangeTitle: "Select Date Range",
+    exportWizardDateRangeSubtitle: "Choose the time period for your export",
+    exportWizardStartDate: "Start Date",
+    exportWizardEndDate: "End Date",
+    exportWizardLast7Days: "Last 7 Days",
+    exportWizardLast30Days: "Last 30 Days",
+    exportWizardLast90Days: "Last 90 Days",
+    
+    exportWizardColumnsTitle: "Select Columns",
+    exportWizardColumnsSubtitle: "Choose which data columns to include",
+    exportWizardSelectDefault: "Select Default",
+    exportWizardSelectAll: "Select All",
+    
+    exportWizardFormatTitle: "Choose Format",
+    exportWizardFormatSubtitle: "Select your preferred export format",
+    exportWizardFormatCSV: "Comma-separated values, good for data analysis",
+    exportWizardFormatExcel: "Excel spreadsheet with formatting and charts",
+    exportWizardFormatPDF: "PDF report with charts and summaries",
+    exportWizardFilename: "Filename",
+    exportWizardFilenamePlaceholder: "Enter filename (without extension)",
+    
+    exportWizardReviewTitle: "Review Export",
+    exportWizardReviewSubtitle: "Review your export settings before proceeding",
+    exportWizardReviewDetails: "Export Details",
+    exportWizardReviewType: "Export Type",
+    exportWizardReviewFormat: "Format",
+    exportWizardReviewColumns: "Columns",
+    exportWizardReviewFilename: "Filename",
+    exportWizardReviewDateRange: "Date Range",
+    exportWizardReviewFrom: "From",
+    exportWizardReviewTo: "To",
+    exportWizardReviewReady: "Your export is ready to be generated",
+    
+    // Progress Dashboard
+    progressDashboardTitle: "Import/Export Progress",
+    progressDashboardSubtitle: "Track your file uploads and exports in real-time",
+    progressDashboardRefresh: "Refresh",
+    progressDashboardAutoRefreshOn: "Auto-refresh On",
+    progressDashboardAutoRefreshOff: "Auto-refresh Off",
+    progressDashboardActiveJobs: "Active Jobs",
+    progressDashboardCompletedJobs: "Completed Jobs",
+    progressDashboardFailedJobs: "Failed Jobs",
+    progressDashboardTotalJobs: "Total Jobs",
+    progressDashboardAllJobs: "All Jobs",
+    progressDashboardNoJobs: "No jobs found",
+    progressDashboardSearchPlaceholder: "Search files...",
+    progressDashboardFilterStatus: "Filter by Status",
+    progressDashboardFilterType: "Filter by Type",
+    progressDashboardFilterAll: "All",
+    progressDashboardFilterPending: "Pending",
+    progressDashboardFilterProcessing: "Processing",
+    progressDashboardFilterCompleted: "Completed",
+    progressDashboardFilterFailed: "Failed",
+    progressDashboardFilterImport: "Import",
+    progressDashboardFilterExport: "Export",
+    progressDashboardProgress: "Progress",
+    progressDashboardPending: "Pending",
+    progressDashboardActive: "Active",
+    progressDashboardCompleted: "Completed",
+    progressDashboardError: "Error",
+    progressDashboardComplete: "Complete",
+    progressDashboardCancel: "Cancel",
+    progressDashboardDownload: "Download",
+    progressDashboardView: "View",
+    progressDashboardRetry: "Retry",
+    progressDashboardErrorsFound: "{count} errors found during processing",
+    progressDashboardUnknownError: "Unknown error occurred",
+    progressDashboardErrorSummary: "Error Summary",
+    progressDashboardViewAllErrors: "View All Errors",
+    progressDashboardStatusPending: "Pending",
+    progressDashboardStatusProcessing: "Processing",
+    progressDashboardStatusCompleted: "Completed",
+    progressDashboardStatusFailed: "Failed",
+    progressDashboardStatusCancelled: "Cancelled",
     
     // Product Fields
     productFieldName: "Product Name",
@@ -1681,16 +1826,19 @@ export async function getServerSideLanguage(): Promise<Language> {
 
 // Enhanced client-side hook with hydration safety
 export function useClientTranslation(serverLanguage?: Language) {
+  // Use server language initially to prevent hydration mismatch
   const [language, setLanguage] = useState<Language>(serverLanguage || DEFAULT_LANGUAGE)
   const [isHydrated, setIsHydrated] = useState(false)
 
   useEffect(() => {
     // Only run on client after hydration
-    const clientLanguage = getClientLanguage()
-    if (clientLanguage !== language) {
-      setLanguage(clientLanguage)
+    if (typeof window !== 'undefined') {
+      const clientLanguage = getClientLanguage()
+      if (clientLanguage !== language) {
+        setLanguage(clientLanguage)
+      }
+      setIsHydrated(true)
     }
-    setIsHydrated(true)
   }, [language])
 
   const t = useCallback((key: string): string => {

@@ -1,0 +1,104 @@
+[
+  {
+    "id": "camp_001",
+    "title": "Summer Fashion Campaign",
+    "description": "Promote summer clothing collection",
+    "budget": 5000,
+    "platforms": [
+      "Instagram",
+      "TikTok"
+    ],
+    "target_audience": {
+      "age_range": [
+        18,
+        35
+      ],
+      "interests": [
+        "fashion",
+        "lifestyle"
+      ],
+      "location": [
+        "US",
+        "CA",
+        "UK"
+      ]
+    },
+    "deliverables": [
+      "Instagram posts",
+      "TikTok videos",
+      "Stories"
+    ],
+    "start_date": "2024-06-01",
+    "end_date": "2024-08-31",
+    "status": "active"
+  },
+  {
+    "id": "camp_002",
+    "title": "Tech Product Launch",
+    "description": "Launch campaign for new smartphone",
+    "budget": 10000,
+    "platforms": [
+      "YouTube",
+      "Instagram",
+      "Twitter"
+    ],
+    "target_audience": {
+      "age_range": [
+        25,
+        45
+      ],
+      "interests": [
+        "technology",
+        "gadgets"
+      ],
+      "location": [
+        "US",
+        "CA",
+        "AU"
+      ]
+    },
+    "deliverables": [
+      "YouTube videos",
+      "Instagram posts",
+      "Twitter threads"
+    ],
+    "start_date": "2024-07-01",
+    "end_date": "2024-09-30",
+    "status": "draft"
+  },
+  {
+    "id": "camp_003",
+    "title": "Fitness App Promotion",
+    "description": "Promote new fitness tracking app",
+    "budget": 3000,
+    "platforms": [
+      "Instagram",
+      "TikTok",
+      "YouTube"
+    ],
+    "target_audience": {
+      "age_range": [
+        18,
+        40
+      ],
+      "interests": [
+        "fitness",
+        "health",
+        "wellness"
+      ],
+      "location": [
+        "US",
+        "UK",
+        "AU"
+      ]
+    },
+    "deliverables": [
+      "Instagram posts",
+      "TikTok videos",
+      "YouTube reviews"
+    ],
+    "start_date": "2024-08-01",
+    "end_date": "2024-10-31",
+    "status": "active"
+  }
+]
